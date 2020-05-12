@@ -27,6 +27,7 @@
 * ["council/votes"](modules/_council_votes_.md)
 * ["council/votesOf"](modules/_council_votesof_.md)
 * ["democracy/dispatchQueue"](modules/_democracy_dispatchqueue_.md)
+* ["democracy/locks"](modules/_democracy_locks_.md)
 * ["democracy/nextExternal"](modules/_democracy_nextexternal_.md)
 * ["democracy/preimage"](modules/_democracy_preimage_.md)
 * ["democracy/preimages"](modules/_democracy_preimages_.md)
