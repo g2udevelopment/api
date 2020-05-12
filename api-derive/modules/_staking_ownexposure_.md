@@ -14,7 +14,7 @@
 
 ▸ **ownExposure**(`api`: ApiInterfaceRx): *function*
 
-*Defined in [packages/api-derive/src/staking/ownExposure.ts:13](https://github.com/polkadot-js/api/blob/fe69f70539/packages/api-derive/src/staking/ownExposure.ts#L13)*
+*Defined in [packages/api-derive/src/staking/ownExposure.ts:13](https://github.com/polkadot-js/api/blob/d1f8f8b5e8/packages/api-derive/src/staking/ownExposure.ts#L13)*
 
 **Parameters:**
 

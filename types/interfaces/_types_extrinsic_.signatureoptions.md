@@ -15,6 +15,7 @@
 * [genesisHash](_types_extrinsic_.signatureoptions.md#genesishash)
 * [nonce](_types_extrinsic_.signatureoptions.md#nonce)
 * [runtimeVersion](_types_extrinsic_.signatureoptions.md#runtimeversion)
+* [signedExtensions](_types_extrinsic_.signatureoptions.md#optional-signedextensions)
 * [signer](_types_extrinsic_.signatureoptions.md#optional-signer)
 * [tip](_types_extrinsic_.signatureoptions.md#optional-tip)
 
@@ -24,7 +25,7 @@
 
 • **blockHash**: *[AnyU8a](../modules/_types_helpers_.md#anyu8a)*
 
-*Defined in [packages/types/src/types/extrinsic.ts:58](https://github.com/polkadot-js/api/blob/fe69f70539/packages/types/src/types/extrinsic.ts#L58)*
+*Defined in [packages/types/src/types/extrinsic.ts:58](https://github.com/polkadot-js/api/blob/d1f8f8b5e8/packages/types/src/types/extrinsic.ts#L58)*
 
 ___
 
@@ -32,7 +33,7 @@ ___
 
 • **era**? : *[IExtrinsicEra](_types_extrinsic_.iextrinsicera.md)*
 
-*Defined in [packages/types/src/types/extrinsic.ts:59](https://github.com/polkadot-js/api/blob/fe69f70539/packages/types/src/types/extrinsic.ts#L59)*
+*Defined in [packages/types/src/types/extrinsic.ts:59](https://github.com/polkadot-js/api/blob/d1f8f8b5e8/packages/types/src/types/extrinsic.ts#L59)*
 
 ___
 
@@ -40,7 +41,7 @@ ___
 
 • **genesisHash**: *[AnyU8a](../modules/_types_helpers_.md#anyu8a)*
 
-*Defined in [packages/types/src/types/extrinsic.ts:60](https://github.com/polkadot-js/api/blob/fe69f70539/packages/types/src/types/extrinsic.ts#L60)*
+*Defined in [packages/types/src/types/extrinsic.ts:60](https://github.com/polkadot-js/api/blob/d1f8f8b5e8/packages/types/src/types/extrinsic.ts#L60)*
 
 ___
 
@@ -48,7 +49,7 @@ ___
 
 • **nonce**: *[AnyNumber](../modules/_types_helpers_.md#anynumber)*
 
-*Defined in [packages/types/src/types/extrinsic.ts:61](https://github.com/polkadot-js/api/blob/fe69f70539/packages/types/src/types/extrinsic.ts#L61)*
+*Defined in [packages/types/src/types/extrinsic.ts:61](https://github.com/polkadot-js/api/blob/d1f8f8b5e8/packages/types/src/types/extrinsic.ts#L61)*
 
 ___
 
@@ -56,7 +57,15 @@ ___
 
 • **runtimeVersion**: *[IRuntimeVersion](_types_interfaces_.iruntimeversion.md)*
 
-*Defined in [packages/types/src/types/extrinsic.ts:62](https://github.com/polkadot-js/api/blob/fe69f70539/packages/types/src/types/extrinsic.ts#L62)*
+*Defined in [packages/types/src/types/extrinsic.ts:62](https://github.com/polkadot-js/api/blob/d1f8f8b5e8/packages/types/src/types/extrinsic.ts#L62)*
+
+___
+
+### `Optional` signedExtensions
+
+• **signedExtensions**? : *string[]*
+
+*Defined in [packages/types/src/types/extrinsic.ts:63](https://github.com/polkadot-js/api/blob/d1f8f8b5e8/packages/types/src/types/extrinsic.ts#L63)*
 
 ___
 
@@ -64,7 +73,7 @@ ___
 
 • **signer**? : *[Signer](_types_extrinsic_.signer.md)*
 
-*Defined in [packages/types/src/types/extrinsic.ts:63](https://github.com/polkadot-js/api/blob/fe69f70539/packages/types/src/types/extrinsic.ts#L63)*
+*Defined in [packages/types/src/types/extrinsic.ts:64](https://github.com/polkadot-js/api/blob/d1f8f8b5e8/packages/types/src/types/extrinsic.ts#L64)*
 
 ___
 
@@ -72,4 +81,4 @@ ___
 
 • **tip**? : *[AnyNumber](../modules/_types_helpers_.md#anynumber)*
 
-*Defined in [packages/types/src/types/extrinsic.ts:64](https://github.com/polkadot-js/api/blob/fe69f70539/packages/types/src/types/extrinsic.ts#L64)*
+*Defined in [packages/types/src/types/extrinsic.ts:65](https://github.com/polkadot-js/api/blob/d1f8f8b5e8/packages/types/src/types/extrinsic.ts#L65)*
