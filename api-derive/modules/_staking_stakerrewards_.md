@@ -16,7 +16,7 @@
 
 ▸ **_stakerRewards**(`api`: ApiInterfaceRx): *function*
 
-*Defined in [packages/api-derive/src/staking/stakerRewards.ts:157](https://github.com/polkadot-js/api/blob/0c5b69bea1/packages/api-derive/src/staking/stakerRewards.ts#L157)*
+*Defined in [packages/api-derive/src/staking/stakerRewards.ts:157](https://github.com/polkadot-js/api/blob/0cf29719b3/packages/api-derive/src/staking/stakerRewards.ts#L157)*
 
 **Parameters:**
 
@@ -42,7 +42,7 @@ ___
 
 ▸ **stakerRewards**(`api`: ApiInterfaceRx): *function*
 
-*Defined in [packages/api-derive/src/staking/stakerRewards.ts:184](https://github.com/polkadot-js/api/blob/0c5b69bea1/packages/api-derive/src/staking/stakerRewards.ts#L184)*
+*Defined in [packages/api-derive/src/staking/stakerRewards.ts:184](https://github.com/polkadot-js/api/blob/0cf29719b3/packages/api-derive/src/staking/stakerRewards.ts#L184)*
 
 **Parameters:**
 
@@ -67,7 +67,7 @@ ___
 
 ▸ **stakerRewardsMulti**(`api`: ApiInterfaceRx): *function*
 
-*Defined in [packages/api-derive/src/staking/stakerRewards.ts:192](https://github.com/polkadot-js/api/blob/0c5b69bea1/packages/api-derive/src/staking/stakerRewards.ts#L192)*
+*Defined in [packages/api-derive/src/staking/stakerRewards.ts:192](https://github.com/polkadot-js/api/blob/0cf29719b3/packages/api-derive/src/staking/stakerRewards.ts#L192)*
 
 **Parameters:**
 
