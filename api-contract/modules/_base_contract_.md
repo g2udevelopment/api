@@ -22,4 +22,4 @@
 
 Ƭ **ContractCallResult**: *CallType extends "rpc" ? Observable<ContractCallOutcome> : Observable<SubmittableResult>*
 
-*Defined in [base/Contract.ts:29](https://github.com/polkadot-js/api/blob/f145488314/packages/api-contract/src/base/Contract.ts#L29)*
+*Defined in [base/Contract.ts:29](https://github.com/polkadot-js/api/blob/c0e3026772/packages/api-contract/src/base/Contract.ts#L29)*
