@@ -28,6 +28,8 @@ The following sections contain Extrinsics methods are part of the default Substr
 
 - **[recovery](#recovery)**
 
+- **[scheduler](#scheduler)**
+
 - **[session](#session)**
 
 - **[society](#society)**
@@ -951,9 +953,11 @@ ___
 
 ## grandpa
  
-### reportMisbehavior(_report: `Vec<u8>`)
-- **interface**: `api.tx.grandpa.reportMisbehavior`
-- **summary**:   Report some misbehavior. 
+### reportEquivocation(equivocation_proof: `EquivocationProof<T::Hash, T::BlockNumber>`, key_owner_proof: `T::KeyOwnerProof`)
+- **interface**: `api.tx.grandpa.reportEquivocation`
+- **summary**:   Report voter equivocation/misbehavior. This method will verify the equivocation proof and validate the given key ownership proof against the extracted offender. If both are valid, the offence will be reported. 
+
+  Since the weight of the extrinsic is 0, in order to avoid DoS by submission of invalid equivocation reports, a mandatory pre-validation of the extrinsic is implemented in a `SignedExtension`. 
 
 ___
 
@@ -980,8 +984,6 @@ ___
 
   - One event.
 
-  - Benchmark: 24.63 + R * 0.53 µs (min squares analysis)
-
   \# \</weight> 
  
 ### cancelRequest(reg_index: `RegistrarIndex`)
@@ -1006,9 +1008,7 @@ ___
 
   - One storage mutation `O(R + X)`.
 
-  - One event.
-
-  - Benchmark: 50.05 + R * 0.321 + X * 1.688 µs (min squares analysis)
+  - One event
 
   \# \</weight> 
  
@@ -1040,12 +1040,6 @@ ___
 
   - One event.
 
-  - Benchmarks:
-
-    - 57.36 + R * 0.019 + S * 2.577 + X * 0.874 µs (median slopes analysis)
-
-    - 57.06 + R * 0.006 + S * 2.579 + X * 0.878 µs (min squares analysis)
-
   \# \</weight> 
  
 ### killIdentity(target: `<T::Lookup as StaticLookup>::Source`)
@@ -1071,8 +1065,6 @@ ___
   - `S + 2` storage mutations.
 
   - One event.
-
-  - Benchmark: 101.9 + R * 0.091 + S * 2.589 + X * 0.871 µs (min squares analysis)
 
   \# \</weight> 
  
@@ -1104,8 +1096,6 @@ ___
 
   - One event.
 
-  - Benchmark: 47.77 + R * 0.336 + X * 1.664 µs (min squares analysis)
-
   \# \</weight> 
  
 ### requestJudgement(reg_index: `Compact<RegistrarIndex>`, max_fee: `Compact<BalanceOf<T>>`)
@@ -1136,8 +1126,6 @@ ___
 
   - One event.
 
-  - Benchmark: 59.02 + R * 0.488 + X * 1.7 µs (min squares analysis)
-
   \# \</weight> 
  
 ### setAccountId(index: `Compact<RegistrarIndex>`, new: `T::AccountId`)
@@ -1158,7 +1146,7 @@ ___
 
   - One storage mutation `O(R)`.
 
-  - Benchmark: 10.05 + R * 0.438 µs (min squares analysis)
+  - Benchmark: 8.823 + R * 0.32 µs (min squares analysis)
 
   \# \</weight> 
  
@@ -1180,7 +1168,7 @@ ___
 
   - One storage mutation `O(R)`.
 
-  - Benchmark: 8.848 + R * 0.425 µs (min squares analysis)
+  - Benchmark: 7.315 + R * 0.329 µs (min squares analysis)
 
   \# \</weight> 
  
@@ -1202,7 +1190,7 @@ ___
 
   - One storage mutation `O(R)`.
 
-  - Benchmark: 8.985 + R * 0.413 µs (min squares analysis)
+  - Benchmark: 7.464 + R * 0.325 µs (min squares analysis)
 
   \# \</weight> 
  
@@ -1233,8 +1221,6 @@ ___
   - One storage mutation (codec-read `O(X' + R)`, codec-write `O(X + R)`).
 
   - One event.
-
-  - Benchmark: 59.44 + R * 0.389 + X * 1.434 µs (min squares analysis)
 
   \# \</weight> 
  
@@ -1269,8 +1255,6 @@ ___
     - One storage write (codec complexity `O(S)`).
 
     - One storage-exists (`IdentityOf::contains_key`).
-
-  - Benchmark: 39.43 + P * 2.522 + S * 3.698 µs (min squares analysis)
 
   \# \</weight> 
 
@@ -1652,6 +1636,99 @@ ___
   - One event.
 
   Total Complexity: O(F + logF + V + logV) 
+
+  \# \</weight> 
+
+___
+
+
+## scheduler
+ 
+### cancel(when: `T::BlockNumber`, index: `u32`)
+- **interface**: `api.tx.scheduler.cancel`
+- **summary**:   Cancel an anonymously scheduled task. 
+
+  \# \<weight>
+
+   
+
+  - S = Number of already scheduled calls
+
+  - Base Weight: 22.15 + 2.869 * S µs
+
+  - DB Weight:
+
+      - Read: Agenda
+
+      - Write: Agenda, Lookup
+
+  - Will use base weight of 100 which should be good for up to 30 scheduled calls
+
+  \# \</weight> 
+ 
+### cancelNamed(id: `Vec<u8>`)
+- **interface**: `api.tx.scheduler.cancelNamed`
+- **summary**:   Cancel a named scheduled task. 
+
+  \# \<weight>
+
+   
+
+  - S = Number of already scheduled calls
+
+  - Base Weight: 24.91 + 2.907 * S µs
+
+  - DB Weight:
+
+      - Read: Agenda, Lookup
+
+      - Write: Agenda, Lookup
+
+  - Will use base weight of 100 which should be good for up to 30 scheduled calls
+
+  \# \</weight> 
+ 
+### schedule(when: `T::BlockNumber`, maybe_periodic: `Option<schedule::Period<T::BlockNumber>>`, priority: `schedule::Priority`, call: `Box<<T as Trait>::Call>`)
+- **interface**: `api.tx.scheduler.schedule`
+- **summary**:   Anonymously schedule a task. 
+
+  \# \<weight>
+
+   
+
+  - S = Number of already scheduled calls
+
+  - Base Weight: 22.29 + .126 * S µs
+
+  - DB Weight:
+
+      - Read: Agenda
+
+      - Write: Agenda
+
+  - Will use base weight of 25 which should be good for up to 30 scheduled calls
+
+  \# \</weight> 
+ 
+### scheduleNamed(id: `Vec<u8>`, when: `T::BlockNumber`, maybe_periodic: `Option<schedule::Period<T::BlockNumber>>`, priority: `schedule::Priority`, call: `Box<<T as Trait>::Call>`)
+- **interface**: `api.tx.scheduler.scheduleNamed`
+- **summary**:   Schedule a named task. 
+
+  \# \<weight>
+
+   
+
+  - S = Number of already scheduled calls
+
+  - Base Weight: 29.6 + .159 * S µs
+
+  - DB Weight:
+
+      - Read: Agenda, Lookup
+
+      - Write: Agenda, Lookup
+
+  - Will use base weight of 35 which should be good for more than 30 scheduled calls
 
   \# \</weight> 
 
@@ -2642,6 +2719,22 @@ ___
   - Weight of derivative `call` execution + 10,000.
 
   \# \</weight> 
+ 
+### sudoUncheckedWeight(call: `Box<<T as Trait>::Call>`, _weight: `Weight`)
+- **interface**: `api.tx.sudo.sudoUncheckedWeight`
+- **summary**:   Authenticates the sudo key and dispatches a function call with `Root` origin. This function does not check the weight of the call, and instead allows the Sudo user to specify the weight of the call. 
+
+  The dispatch origin for this call must be _Signed_. 
+
+  \# \<weight>
+
+   
+
+  - O(1).
+
+  - The weight of this call is defined by the caller.
+
+  \# \</weight> 
 
 ___
 
@@ -2652,9 +2745,11 @@ ___
 - **interface**: `api.tx.system.fillBlock`
 - **summary**:   A dispatch that will fill the block weight up to the given ratio. 
  
-### killPrefix(prefix: `Key`)
+### killPrefix(prefix: `Key`, _subkeys: `u32`)
 - **interface**: `api.tx.system.killPrefix`
 - **summary**:   Kill all storage items with a key that starts with the given prefix. 
+
+  **NOTE:** We rely on the Root origin to provide us the number of subkeys under the prefix we are removing to accurately calculate the weight of this function. 
 
   \# \<weight>
 
@@ -2663,6 +2758,10 @@ ___
   - `O(P)` where `P` amount of keys with prefix `prefix`
 
   - `P` storage deletions.
+
+  - Base Weight: 0.834 * P µs
+
+  - Writes: Number of subkeys + 1
 
   \# \</weight> 
  
@@ -2674,9 +2773,13 @@ ___
 
    
 
-  - `O(VK)` where `V` length of `keys` and `K` length of one key
+  - `O(IK)` where `I` length of `keys` and `K` length of one key
 
-  - `V` storage deletions.
+  - `I` storage deletions.
+
+  - Base Weight: .378 * i µs
+
+  - Writes: Number of items
 
   \# \</weight> 
  
@@ -2690,6 +2793,10 @@ ___
 
   - `O(1)`
 
+  - Base Weight: 0.665 µs, independent of remark length.
+
+  - No DB operations.
+
   \# \</weight> 
  
 ### setChangesTrieConfig(changes_trie_config: `Option<ChangesTrieConfiguration>`)
@@ -2700,11 +2807,17 @@ ___
 
    
 
-  - `O(D)` where `D` length of `Digest`
+  - `O(1)`
 
   - 1 storage write or delete (codec `O(1)`).
 
-  - 1 call to `deposit_log`: `O(D)` (which depends on the length of `Digest`)
+  - 1 call to `deposit_log`: Uses `append` API, so O(1)
+
+  - Base Weight: 7.218 µs
+
+  - DB Weight:
+
+      - Writes: Changes Trie, System Digest
 
   \# \</weight> 
  
@@ -2722,7 +2835,7 @@ ___
 
   - 1 call to `can_set_code`: `O(S)` (calls `sp_io::misc::runtime_version` which is expensive).
 
-  - 1 event.
+  - 1 event.The weight of this function is dependent on the runtime, but generally this is very expensive. We will treat this as a full block. 
 
   \# \</weight> 
  
@@ -2738,7 +2851,7 @@ ___
 
   - 1 storage write (codec `O(C)`).
 
-  - 1 event.
+  - 1 event.The weight of this function is dependent on the runtime. We will treat this as a full block. 
 
   \# \</weight> 
  
@@ -2754,6 +2867,10 @@ ___
 
   - 1 storage write.
 
+  - Base Weight: 1.405 µs
+
+  - 1 write to HEAP_PAGES
+
   \# \</weight> 
  
 ### setStorage(items: `Vec<KeyValue>`)
@@ -2768,6 +2885,10 @@ ___
 
   - `I` storage writes (`O(1)`).
 
+  - Base Weight: 0.568 * i µs
+
+  - Writes: Number of items
+
   \# \</weight> 
  
 ### suicide()
@@ -2781,6 +2902,8 @@ ___
   - `O(1)`
 
   - 1 storage read and deletion.
+
+  --------------------Base Weight: 8.626 µs No DB Read or Write operations because caller is already in overlay 
 
   \# \</weight> 
 
@@ -2921,7 +3044,7 @@ ___
 
   - 1 event handler `on_timestamp_set` `O(T)`.
 
-  - Benchmark: 8.523 (min squares analysis)
+  - Benchmark: 7.678 (min squares analysis)
 
     - NOTE: This benchmark was done for a runtime with insignificant `on_timestamp_set` handlers.    New benchmarking is needed when adding new handlers. 
 

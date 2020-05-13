@@ -270,7 +270,7 @@ ___
 - **summary**:   A new heartbeat was received from `AuthorityId` 
  
 ### SomeOffline(`Vec<IdentificationTuple>`)
-- **summary**:   At the end of the session, at least once validator was found to be offline. 
+- **summary**:   At the end of the session, at least one validator was found to be offline. 
 
 ___
 
@@ -319,9 +319,11 @@ ___
 
 ## scheduler
  
+### Canceled(`BlockNumber`, `u32`)
+ 
 ### Dispatched(`TaskAddress<BlockNumber>`, `Option<Vec<u8>>`, `DispatchResult`)
  
-### Scheduled(`BlockNumber`)
+### Scheduled(`BlockNumber`, `u32`)
 
 ___
 

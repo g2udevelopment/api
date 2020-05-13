@@ -762,9 +762,9 @@ ___
 - **interface**: `api.query.system.allExtrinsicsLen`
 - **summary**:   Total length (in bytes) for all extrinsics put together, for the current block. 
  
-### allExtrinsicsWeight(): `Option<Weight>`
+### allExtrinsicsWeight(): `ExtrinsicsWeight`
 - **interface**: `api.query.system.allExtrinsicsWeight`
-- **summary**:   Total weight for all extrinsics put together, for the current block. 
+- **summary**:   Total weight for all extrinsics for the current block. 
  
 ### blockHash(`BlockNumber`): `Hash`
 - **interface**: `api.query.system.blockHash`

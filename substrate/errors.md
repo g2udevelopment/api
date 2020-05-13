@@ -331,6 +331,12 @@ ___
 ### ChangePending
 - **summary**:   Attempt to signal GRANDPA change with one already pending. 
  
+### DuplicateOffenceReport
+- **summary**:   A given equivocation report is valid but already previously reported. 
+ 
+### InvalidKeyOwnershipProof
+- **summary**:   A key ownership proof provided as part of an equivocation report is invalid. 
+ 
 ### PauseFailed
 - **summary**:   Attempt to signal GRANDPA pause when the authority set isn't live (either paused or already pending pause). 
  

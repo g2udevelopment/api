@@ -251,6 +251,10 @@ ___
 - **interface**: `api.consts.system.blockExecutionWeight`
 - **summary**:   The base weight of executing a block, independent of the transactions in the block. 
  
+### blockHashCount: `T::BlockNumber`
+- **interface**: `api.consts.system.blockHashCount`
+- **summary**:   The maximum number of blocks to allow in mortal eras. 
+ 
 ### dbWeight: `RuntimeDbWeight`
 - **interface**: `api.consts.system.dbWeight`
 - **summary**:   The weight of runtime database operations the runtime can invoke. 
