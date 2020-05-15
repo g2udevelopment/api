@@ -76,6 +76,7 @@
 * [toRawType](_types_interfaces_.iu8a.md#torawtype)
 * [toString](_types_interfaces_.iu8a.md#tostring)
 * [toU8a](_types_interfaces_.iu8a.md#tou8a)
+* [valueOf](_types_interfaces_.iu8a.md#valueof)
 * [values](_types_interfaces_.iu8a.md#values)
 
 ## Properties
@@ -86,7 +87,7 @@
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:1988
+Defined in node_modules/typescript/lib/lib.es5.d.ts:1991
 
 The size in bytes of each element in the array.
 
@@ -96,17 +97,17 @@ ___
 
 • **Uint8Array**: *Uint8ArrayConstructor*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2257
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2263
 
 ___
 
 ### `Readonly` [Symbol.toStringTag]
 
-• **[Symbol.toStringTag]**: *"UInt8Array"*
+• **[Symbol.toStringTag]**: *"Uint8Array"*
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts:276
+Defined in node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts:277
 
 ___
 
@@ -116,7 +117,7 @@ ___
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:1993
+Defined in node_modules/typescript/lib/lib.es5.d.ts:1996
 
 The ArrayBuffer instance referenced by the array.
 
@@ -128,7 +129,7 @@ ___
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:1998
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2001
 
 The length in bytes of the array.
 
@@ -140,7 +141,7 @@ ___
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2003
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2006
 
 The offset in bytes of the array.
 
@@ -152,7 +153,7 @@ ___
 
 *Inherited from [SignerPayloadType](_extrinsic_signerpayload_.signerpayloadtype.md).[encodedLength](_extrinsic_signerpayload_.signerpayloadtype.md#readonly-encodedlength)*
 
-*Defined in [packages/types/src/types/codec.ts:40](https://github.com/polkadot-js/api/blob/337de79bef/packages/types/src/types/codec.ts#L40)*
+*Defined in [packages/types/src/types/codec.ts:40](https://github.com/polkadot-js/api/blob/45786b31da/packages/types/src/types/codec.ts#L40)*
 
 **`description`** The length of the value when encoded as a Uint8Array
 
@@ -164,7 +165,7 @@ ___
 
 *Inherited from [SignerPayloadType](_extrinsic_signerpayload_.signerpayloadtype.md).[hash](_extrinsic_signerpayload_.signerpayloadtype.md#readonly-hash)*
 
-*Defined in [packages/types/src/types/codec.ts:45](https://github.com/polkadot-js/api/blob/337de79bef/packages/types/src/types/codec.ts#L45)*
+*Defined in [packages/types/src/types/codec.ts:45](https://github.com/polkadot-js/api/blob/45786b31da/packages/types/src/types/codec.ts#L45)*
 
 **`description`** Returns a hash of the value
 
@@ -176,7 +177,7 @@ ___
 
 *Inherited from [SignerPayloadType](_extrinsic_signerpayload_.signerpayloadtype.md).[isEmpty](_extrinsic_signerpayload_.signerpayloadtype.md#readonly-isempty)*
 
-*Defined in [packages/types/src/types/codec.ts:50](https://github.com/polkadot-js/api/blob/337de79bef/packages/types/src/types/codec.ts#L50)*
+*Defined in [packages/types/src/types/codec.ts:50](https://github.com/polkadot-js/api/blob/45786b31da/packages/types/src/types/codec.ts#L50)*
 
 **`description`** Checks if the value is an empty value
 
@@ -188,7 +189,7 @@ ___
 
 *Inherited from [IU8a](_types_interfaces_.iu8a.md).[length](_types_interfaces_.iu8a.md#readonly-length)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2102
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2105
 
 The length of the array.
 
@@ -200,7 +201,7 @@ ___
 
 *Inherited from [SignerPayloadType](_extrinsic_signerpayload_.signerpayloadtype.md).[registry](_extrinsic_signerpayload_.signerpayloadtype.md#readonly-registry)*
 
-*Defined in [packages/types/src/types/codec.ts:55](https://github.com/polkadot-js/api/blob/337de79bef/packages/types/src/types/codec.ts#L55)*
+*Defined in [packages/types/src/types/codec.ts:55](https://github.com/polkadot-js/api/blob/45786b31da/packages/types/src/types/codec.ts#L55)*
 
 **`description`** The registry associated with this object
 
@@ -212,7 +213,7 @@ ___
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es2015.iterable.d.ts:275
+Defined in node_modules/typescript/lib/lib.es2015.iterable.d.ts:283
 
 **Returns:** *IterableIterator‹number›*
 
@@ -222,7 +223,7 @@ ___
 
 ▸ **bitLength**(): *number*
 
-*Defined in [packages/types/src/types/interfaces.ts:54](https://github.com/polkadot-js/api/blob/337de79bef/packages/types/src/types/interfaces.ts#L54)*
+*Defined in [packages/types/src/types/interfaces.ts:54](https://github.com/polkadot-js/api/blob/45786b31da/packages/types/src/types/interfaces.ts#L54)*
 
 **Returns:** *number*
 
@@ -234,7 +235,7 @@ ___
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2014
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2017
 
 Returns the this object after copying a section of the array identified by start and end
 to the same array starting at position target
@@ -257,7 +258,7 @@ ___
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es2015.iterable.d.ts:279
+Defined in node_modules/typescript/lib/lib.es2015.iterable.d.ts:287
 
 Returns an array of key, value pairs for every entry in the array
 
@@ -271,7 +272,7 @@ ___
 
 *Inherited from [SignerPayloadType](_extrinsic_signerpayload_.signerpayloadtype.md).[eq](_extrinsic_signerpayload_.signerpayloadtype.md#eq)*
 
-*Defined in [packages/types/src/types/codec.ts:60](https://github.com/polkadot-js/api/blob/337de79bef/packages/types/src/types/codec.ts#L60)*
+*Defined in [packages/types/src/types/codec.ts:60](https://github.com/polkadot-js/api/blob/45786b31da/packages/types/src/types/codec.ts#L60)*
 
 **`description`** Compares the value of the input to see if there is a match
 
@@ -291,7 +292,7 @@ ___
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2024
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2027
 
 Determines whether all the members of an array satisfy the specified test.
 
@@ -328,7 +329,7 @@ ___
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2034
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2037
 
 Returns the this object after filling the section identified by start and end with value
 
@@ -350,7 +351,7 @@ ___
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2043
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2046
 
 Returns the elements of an array that meet the condition specified in a callback function.
 
@@ -386,7 +387,7 @@ ___
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2054
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2057
 
 Returns the value of the first element in the array where predicate is true, and undefined
 otherwise.
@@ -424,7 +425,7 @@ ___
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2065
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2068
 
 Returns the index of the first element in the array where predicate is true, and -1
 otherwise.
@@ -462,7 +463,7 @@ ___
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2074
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2077
 
 Performs the specified action for each element in an array.
 
@@ -519,7 +520,7 @@ ___
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2082
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2085
 
 Returns the index of the first occurrence of a value in an array.
 
@@ -540,7 +541,7 @@ ___
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2089
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2092
 
 Adds all the elements of an array separated by the specified separator string.
 
@@ -560,7 +561,7 @@ ___
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es2015.iterable.d.ts:283
+Defined in node_modules/typescript/lib/lib.es2015.iterable.d.ts:291
 
 Returns an list of keys in the array
 
@@ -574,7 +575,7 @@ ___
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2097
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2100
 
 Returns the index of the last occurrence of a value in an array.
 
@@ -595,7 +596,7 @@ ___
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2112
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2115
 
 Calls a defined callback function on each element of an array, and returns an array that
 contains the results.
@@ -632,7 +633,7 @@ ___
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2124
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2127
 
 Calls the specified callback function for all the elements in an array. The return value of
 the callback function is the accumulated result, and is provided as an argument in the next
@@ -662,7 +663,7 @@ Name | Type |
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2125
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2128
 
 **Parameters:**
 
@@ -687,7 +688,7 @@ Name | Type |
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2137
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2140
 
 Calls the specified callback function for all the elements in an array. The return value of
 the callback function is the accumulated result, and is provided as an argument in the next
@@ -731,7 +732,7 @@ ___
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2149
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2152
 
 Calls the specified callback function for all the elements in an array, in descending order.
 The return value of the callback function is the accumulated result, and is provided as an
@@ -761,7 +762,7 @@ Name | Type |
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2150
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2153
 
 **Parameters:**
 
@@ -786,7 +787,7 @@ Name | Type |
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2162
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2165
 
 Calls the specified callback function for all the elements in an array, in descending order.
 The return value of the callback function is the accumulated result, and is provided as an
@@ -830,7 +831,7 @@ ___
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2167
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2170
 
 Reverses the elements in an Array.
 
@@ -844,7 +845,7 @@ ___
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2174
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2177
 
 Sets a value or an array of values.
 
@@ -865,7 +866,7 @@ ___
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2181
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2184
 
 Returns a section of an array.
 
@@ -886,7 +887,7 @@ ___
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2191
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2194
 
 Determines whether the specified callback function returns true for any element of an array.
 
@@ -923,7 +924,7 @@ ___
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2202
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2205
 
 Sorts an array.
 
@@ -943,7 +944,7 @@ ___
 
 *Inherited from [IU8a](_types_interfaces_.iu8a.md).[subarray](_types_interfaces_.iu8a.md#subarray)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2210
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2213
 
 Gets a new Uint8Array view of the ArrayBuffer store for this array, referencing the elements
 at begin, inclusive, up to end, exclusive.
@@ -965,7 +966,7 @@ ___
 
 *Inherited from [SignerPayloadType](_extrinsic_signerpayload_.signerpayloadtype.md).[toHex](_extrinsic_signerpayload_.signerpayloadtype.md#tohex)*
 
-*Defined in [packages/types/src/types/codec.ts:65](https://github.com/polkadot-js/api/blob/337de79bef/packages/types/src/types/codec.ts#L65)*
+*Defined in [packages/types/src/types/codec.ts:65](https://github.com/polkadot-js/api/blob/45786b31da/packages/types/src/types/codec.ts#L65)*
 
 **`description`** Returns a hex string representation of the value. isLe returns a LE (number-only) representation
 
@@ -985,7 +986,7 @@ ___
 
 *Overrides [SignerPayloadType](_extrinsic_signerpayload_.signerpayloadtype.md).[toHuman](_extrinsic_signerpayload_.signerpayloadtype.md#tohuman)*
 
-*Defined in [packages/types/src/types/interfaces.ts:55](https://github.com/polkadot-js/api/blob/337de79bef/packages/types/src/types/interfaces.ts#L55)*
+*Defined in [packages/types/src/types/interfaces.ts:55](https://github.com/polkadot-js/api/blob/45786b31da/packages/types/src/types/interfaces.ts#L55)*
 
 **Parameters:**
 
@@ -1003,7 +1004,7 @@ ___
 
 *Overrides [SignerPayloadType](_extrinsic_signerpayload_.signerpayloadtype.md).[toJSON](_extrinsic_signerpayload_.signerpayloadtype.md#tojson)*
 
-*Defined in [packages/types/src/types/interfaces.ts:56](https://github.com/polkadot-js/api/blob/337de79bef/packages/types/src/types/interfaces.ts#L56)*
+*Defined in [packages/types/src/types/interfaces.ts:56](https://github.com/polkadot-js/api/blob/45786b31da/packages/types/src/types/interfaces.ts#L56)*
 
 **Returns:** *any*
 
@@ -1015,7 +1016,7 @@ ___
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2215
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2218
 
 Converts a number to a string by using the current locale.
 
@@ -1029,7 +1030,7 @@ ___
 
 *Inherited from [SignerPayloadType](_extrinsic_signerpayload_.signerpayloadtype.md).[toRawType](_extrinsic_signerpayload_.signerpayloadtype.md#torawtype)*
 
-*Defined in [packages/types/src/types/codec.ts:80](https://github.com/polkadot-js/api/blob/337de79bef/packages/types/src/types/codec.ts#L80)*
+*Defined in [packages/types/src/types/codec.ts:80](https://github.com/polkadot-js/api/blob/45786b31da/packages/types/src/types/codec.ts#L80)*
 
 **`description`** Returns the base runtime type name for this instance
 
@@ -1045,7 +1046,7 @@ ___
 
 *Overrides [SignerPayloadType](_extrinsic_signerpayload_.signerpayloadtype.md).[toString](_extrinsic_signerpayload_.signerpayloadtype.md#tostring)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:2220
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2223
 
 Returns a string representation of an array.
 
@@ -1059,7 +1060,7 @@ ___
 
 *Inherited from [SignerPayloadType](_extrinsic_signerpayload_.signerpayloadtype.md).[toU8a](_extrinsic_signerpayload_.signerpayloadtype.md#tou8a)*
 
-*Defined in [packages/types/src/types/codec.ts:91](https://github.com/polkadot-js/api/blob/337de79bef/packages/types/src/types/codec.ts#L91)*
+*Defined in [packages/types/src/types/codec.ts:91](https://github.com/polkadot-js/api/blob/45786b31da/packages/types/src/types/codec.ts#L91)*
 
 **`description`** Encodes the value as a Uint8Array as per the SCALE specifications
 
@@ -1073,13 +1074,27 @@ Name | Type | Description |
 
 ___
 
+###  valueOf
+
+▸ **valueOf**(): *[Uint8Array](../classes/_codec_raw_.raw.md#static-uint8array)*
+
+*Inherited from void*
+
+Defined in node_modules/typescript/lib/lib.es5.d.ts:2226
+
+Returns the primitive value of the specified object.
+
+**Returns:** *[Uint8Array](../classes/_codec_raw_.raw.md#static-uint8array)*
+
+___
+
 ###  values
 
 ▸ **values**(): *IterableIterator‹number›*
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es2015.iterable.d.ts:287
+Defined in node_modules/typescript/lib/lib.es2015.iterable.d.ts:295
 
 Returns an list of values in the array
 
