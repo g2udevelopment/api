@@ -6,17 +6,18 @@
 
 ### Functions
 
+* [_eraPrefs](_staking_erasprefs_.md#_eraprefs)
 * [_erasPrefs](_staking_erasprefs_.md#_erasprefs)
 * [eraPrefs](_staking_erasprefs_.md#eraprefs)
 * [erasPrefs](_staking_erasprefs_.md#erasprefs)
 
 ## Functions
 
-###  _erasPrefs
+###  _eraPrefs
 
-▸ **_erasPrefs**(`api`: ApiInterfaceRx): *function*
+▸ **_eraPrefs**(`api`: ApiInterfaceRx): *function*
 
-*Defined in [packages/api-derive/src/staking/erasPrefs.ts:33](https://github.com/polkadot-js/api/blob/f8f7e92da4/packages/api-derive/src/staking/erasPrefs.ts#L33)*
+*Defined in [packages/api-derive/src/staking/erasPrefs.ts:27](https://github.com/polkadot-js/api/blob/67a3376ef8/packages/api-derive/src/staking/erasPrefs.ts#L27)*
 
 **Parameters:**
 
@@ -26,13 +27,39 @@ Name | Type |
 
 **Returns:** *function*
 
-▸ (`eras`: EraIndex[]): *Observable‹DeriveEraPrefs[]›*
+▸ (`era`: EraIndex, `withActive`: boolean): *Observable‹DeriveEraPrefs›*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`era` | EraIndex |
+`withActive` | boolean |
+
+___
+
+###  _erasPrefs
+
+▸ **_erasPrefs**(`api`: ApiInterfaceRx): *function*
+
+*Defined in [packages/api-derive/src/staking/erasPrefs.ts:54](https://github.com/polkadot-js/api/blob/67a3376ef8/packages/api-derive/src/staking/erasPrefs.ts#L54)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`api` | ApiInterfaceRx |
+
+**Returns:** *function*
+
+▸ (`eras`: EraIndex[], `withActive`: boolean): *Observable‹DeriveEraPrefs[]›*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
 `eras` | EraIndex[] |
+`withActive` | boolean |
 
 ___
 
@@ -40,7 +67,7 @@ ___
 
 ▸ **eraPrefs**(`api`: ApiInterfaceRx): *function*
 
-*Defined in [packages/api-derive/src/staking/erasPrefs.ts:25](https://github.com/polkadot-js/api/blob/f8f7e92da4/packages/api-derive/src/staking/erasPrefs.ts#L25)*
+*Defined in [packages/api-derive/src/staking/erasPrefs.ts:48](https://github.com/polkadot-js/api/blob/67a3376ef8/packages/api-derive/src/staking/erasPrefs.ts#L48)*
 
 **Parameters:**
 
@@ -64,7 +91,7 @@ ___
 
 ▸ **erasPrefs**(`api`: ApiInterfaceRx): *function*
 
-*Defined in [packages/api-derive/src/staking/erasPrefs.ts:41](https://github.com/polkadot-js/api/blob/f8f7e92da4/packages/api-derive/src/staking/erasPrefs.ts#L41)*
+*Defined in [packages/api-derive/src/staking/erasPrefs.ts:62](https://github.com/polkadot-js/api/blob/67a3376ef8/packages/api-derive/src/staking/erasPrefs.ts#L62)*
 
 **Parameters:**
 

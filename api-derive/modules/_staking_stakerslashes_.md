@@ -15,7 +15,7 @@
 
 ▸ **_stakerSlashes**(`api`: ApiInterfaceRx): *function*
 
-*Defined in [packages/api-derive/src/staking/stakerSlashes.ts:14](https://github.com/polkadot-js/api/blob/f8f7e92da4/packages/api-derive/src/staking/stakerSlashes.ts#L14)*
+*Defined in [packages/api-derive/src/staking/stakerSlashes.ts:14](https://github.com/polkadot-js/api/blob/67a3376ef8/packages/api-derive/src/staking/stakerSlashes.ts#L14)*
 
 **Parameters:**
 
@@ -25,7 +25,7 @@ Name | Type |
 
 **Returns:** *function*
 
-▸ (`accountId`: Uint8Array | string, `eras`: EraIndex[]): *Observable‹DeriveStakerSlashes[]›*
+▸ (`accountId`: Uint8Array | string, `eras`: EraIndex[], `withActive`: boolean): *Observable‹DeriveStakerSlashes[]›*
 
 **Parameters:**
 
@@ -33,6 +33,7 @@ Name | Type |
 ------ | ------ |
 `accountId` | Uint8Array &#124; string |
 `eras` | EraIndex[] |
+`withActive` | boolean |
 
 ___
 
@@ -40,7 +41,7 @@ ___
 
 ▸ **stakerSlashes**(`api`: ApiInterfaceRx): *function*
 
-*Defined in [packages/api-derive/src/staking/stakerSlashes.ts:29](https://github.com/polkadot-js/api/blob/f8f7e92da4/packages/api-derive/src/staking/stakerSlashes.ts#L29)*
+*Defined in [packages/api-derive/src/staking/stakerSlashes.ts:29](https://github.com/polkadot-js/api/blob/67a3376ef8/packages/api-derive/src/staking/stakerSlashes.ts#L29)*
 
 **Parameters:**
 

@@ -79,4 +79,6 @@
 * ["tx/signingInfo"](modules/_tx_signinginfo_.md)
 * ["type/HeaderExtended"](modules/_type_headerextended_.md)
 * ["util/approvalFlagsToBools"](modules/_util_approvalflagstobools_.md)
+* ["util/cache"](modules/_util_cache_.md)
+* ["util/cacheImpl"](modules/_util_cacheimpl_.md)
 * ["util/memo"](modules/_util_memo_.md)

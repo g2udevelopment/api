@@ -15,7 +15,7 @@
 
 ▸ **_stakerPoints**(`api`: ApiInterfaceRx): *function*
 
-*Defined in [packages/api-derive/src/staking/stakerPoints.ts:14](https://github.com/polkadot-js/api/blob/f8f7e92da4/packages/api-derive/src/staking/stakerPoints.ts#L14)*
+*Defined in [packages/api-derive/src/staking/stakerPoints.ts:14](https://github.com/polkadot-js/api/blob/67a3376ef8/packages/api-derive/src/staking/stakerPoints.ts#L14)*
 
 **Parameters:**
 
@@ -25,7 +25,7 @@ Name | Type |
 
 **Returns:** *function*
 
-▸ (`accountId`: Uint8Array | string, `eras`: EraIndex[]): *Observable‹DeriveStakerPoints[]›*
+▸ (`accountId`: Uint8Array | string, `eras`: EraIndex[], `withActive`: boolean): *Observable‹DeriveStakerPoints[]›*
 
 **Parameters:**
 
@@ -33,6 +33,7 @@ Name | Type |
 ------ | ------ |
 `accountId` | Uint8Array &#124; string |
 `eras` | EraIndex[] |
+`withActive` | boolean |
 
 ___
 
@@ -40,7 +41,7 @@ ___
 
 ▸ **stakerPoints**(`api`: ApiInterfaceRx): *function*
 
-*Defined in [packages/api-derive/src/staking/stakerPoints.ts:30](https://github.com/polkadot-js/api/blob/f8f7e92da4/packages/api-derive/src/staking/stakerPoints.ts#L30)*
+*Defined in [packages/api-derive/src/staking/stakerPoints.ts:30](https://github.com/polkadot-js/api/blob/67a3376ef8/packages/api-derive/src/staking/stakerPoints.ts#L30)*
 
 **Parameters:**
 

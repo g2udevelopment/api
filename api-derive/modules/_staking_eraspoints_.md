@@ -15,7 +15,7 @@
 
 ▸ **_erasPoints**(`api`: ApiInterfaceRx): *function*
 
-*Defined in [packages/api-derive/src/staking/erasPoints.ts:24](https://github.com/polkadot-js/api/blob/f8f7e92da4/packages/api-derive/src/staking/erasPoints.ts#L24)*
+*Defined in [packages/api-derive/src/staking/erasPoints.ts:34](https://github.com/polkadot-js/api/blob/67a3376ef8/packages/api-derive/src/staking/erasPoints.ts#L34)*
 
 **Parameters:**
 
@@ -25,13 +25,14 @@ Name | Type |
 
 **Returns:** *function*
 
-▸ (`eras`: EraIndex[]): *Observable‹DeriveEraPoints[]›*
+▸ (`eras`: EraIndex[], `withActive`: boolean): *Observable‹DeriveEraPoints[]›*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
 `eras` | EraIndex[] |
+`withActive` | boolean |
 
 ___
 
@@ -39,7 +40,7 @@ ___
 
 ▸ **erasPoints**(`api`: ApiInterfaceRx): *function*
 
-*Defined in [packages/api-derive/src/staking/erasPoints.ts:40](https://github.com/polkadot-js/api/blob/f8f7e92da4/packages/api-derive/src/staking/erasPoints.ts#L40)*
+*Defined in [packages/api-derive/src/staking/erasPoints.ts:64](https://github.com/polkadot-js/api/blob/67a3376ef8/packages/api-derive/src/staking/erasPoints.ts#L64)*
 
 **Parameters:**
 
