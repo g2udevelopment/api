@@ -41,6 +41,7 @@
 * [society](_interfaces_definitions_.md#society)
 * [staking](_interfaces_definitions_.md#staking)
 * [state](_interfaces_definitions_.md#state)
+* [support](_interfaces_definitions_.md#support)
 * [system](_interfaces_definitions_.md#system)
 * [treasury](_interfaces_definitions_.md#treasury)
 * [txpayment](_interfaces_definitions_.md#txpayment)
@@ -256,6 +257,12 @@ ___
 ###  state
 
 • **state**:
+
+___
+
+###  support
+
+• **support**:
 
 ___
 

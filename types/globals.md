@@ -112,6 +112,7 @@
 * ["interfaces/society/definitions"](modules/_interfaces_society_definitions_.md)
 * ["interfaces/staking/definitions"](modules/_interfaces_staking_definitions_.md)
 * ["interfaces/state/definitions"](modules/_interfaces_state_definitions_.md)
+* ["interfaces/support/definitions"](modules/_interfaces_support_definitions_.md)
 * ["interfaces/system/definitions"](modules/_interfaces_system_definitions_.md)
 * ["interfaces/treasury/definitions"](modules/_interfaces_treasury_definitions_.md)
 * ["interfaces/txpayment/definitions"](modules/_interfaces_txpayment_definitions_.md)
