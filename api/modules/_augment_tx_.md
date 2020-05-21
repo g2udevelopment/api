@@ -2,4 +2,8 @@
 
 # Module: "augment/tx"
 
+## Index
 
+### Modules
+
+* ["api/types/submittable"](_augment_tx_._api_types_submittable_.md)

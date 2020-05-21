@@ -207,63 +207,167 @@ ___
 
 ## council
  
-### close(proposal: `T::Hash`, index: `Compact<ProposalIndex>`)
+### close(proposal: `T::Hash`, index: `Compact<ProposalIndex>`, proposal_weight_bound: `Compact<Weight>`, length_bound: `Compact<u32>`)
 - **interface**: `api.tx.council.close`
-- **summary**:   May be called by any signed account after the voting duration has ended in order to finish voting and close the proposal. 
+- **summary**:   Close a vote that is either approved, disapproved or whose voting period has ended. 
 
-  Abstentions are counted as rejections unless there is a prime member set and the prime member cast an approval. 
+  May be called by any signed account in order to finish voting and close the proposal. 
 
-  - the weight of `proposal` preimage. 
+  If called before the end of the voting period it will only close the vote if it is has enough votes to be approved or disapproved. 
 
-  - up to three events deposited.
+  If called after the end of the voting period abstentions are counted as rejections unless there is a prime member set and the prime member cast an approval. 
 
-  - one read, two removals, one mutation. (plus three static reads.)
+  + `proposal_weight_bound`: The maximum amount of weight consumed by executing the closed proposal. + `length_bound`: The upper bound for the length of the proposal in storage. Checked via                   `storage::read` so it is `size_of::<u32>() == 4` larger than the pure length. 
 
-  - computation and i/o `O(P + L + M)` where:
+  \# \<weight>
 
-    - `M` is number of members,
+   #### Weight 
 
-    - `P` is number of active proposals,
+  - `O(B + M + P1 + P2)` where:
 
-    - `L` is the encoded length of `proposal` preimage.
+    - `B` is `proposal` size in bytes (length-fee-bounded)
+
+    - `M` is members-count (code- and governance-bounded)
+
+    - `P1` is the complexity of `proposal` preimage.
+
+    - `P2` is proposal-count (code-bounded)
+
+  - DB:
+
+   - 2 storage reads (`Members`: codec `O(M)`, `Prime`: codec `O(1)`)
+
+   - 3 mutations (`Voting`: codec `O(M)`, `ProposalOf`: codec `O(B)`, `Proposals`: codec `O(P2)`)
+
+   - any mutations done while executing `proposal` (`P1`)
+
+  - up to 3 events
+
+  \# \</weight> 
  
-### execute(proposal: `Box<<T as Trait<I>>::Proposal>`)
+### execute(proposal: `Box<<T as Trait<I>>::Proposal>`, length_bound: `Compact<u32>`)
 - **interface**: `api.tx.council.execute`
 - **summary**:   Dispatch a proposal from a member using the `Member` origin. 
 
   Origin must be a member of the collective. 
- 
-### propose(threshold: `Compact<MemberCount>`, proposal: `Box<<T as Trait<I>>::Proposal>`)
-- **interface**: `api.tx.council.propose`
-- **summary**:   \# \<weight>
 
-   
+  \# \<weight>
 
-  - Bounded storage reads and writes.
+   #### Weight 
 
-  - Argument `threshold` has bearing on weight.
+  - `O(M + P)` where `M` members-count (code-bounded) and `P` complexity of dispatching `proposal`
+
+  - DB: 1 read (codec `O(M)`) + DB access of `proposal`
+
+  - 1 event
 
   \# \</weight> 
  
-### setMembers(new_members: `Vec<T::AccountId>`, prime: `Option<T::AccountId>`)
+### propose(threshold: `Compact<MemberCount>`, proposal: `Box<<T as Trait<I>>::Proposal>`, length_bound: `Compact<u32>`)
+- **interface**: `api.tx.council.propose`
+- **summary**:   Add a new proposal to either be voted on or executed directly. 
+
+  Requires the sender to be member. 
+
+  `threshold` determines whether `proposal` is executed directly (`threshold < 2`) or put up for voting. 
+
+  \# \<weight>
+
+   #### Weight 
+
+  - `O(B + M + P1)` or `O(B + M + P2)` where:
+
+    - `B` is `proposal` size in bytes (length-fee-bounded)
+
+    - `M` is members-count (code- and governance-bounded)
+
+    - branching is influenced by `threshold` where:
+
+      - `P1` is proposal execution complexity (`threshold < 2`)
+
+      - `P2` is proposals-count (code-bounded) (`threshold >= 2`)
+
+  - DB:
+
+    - 1 storage read `is_member` (codec `O(M)`)
+
+    - 1 storage read `ProposalOf::contains_key` (codec `O(1)`)
+
+    - DB accesses influenced by `threshold`:
+
+      - EITHER storage accesses done by `proposal` (`threshold < 2`)
+
+      - OR proposal insertion (`threshold <= 2`)
+
+        - 1 storage mutation `Proposals` (codec `O(P2)`)
+
+        - 1 storage mutation `ProposalCount` (codec `O(1)`)
+
+        - 1 storage write `ProposalOf` (codec `O(B)`)
+
+        - 1 storage write `Voting` (codec `O(M)`)
+
+    - 1 event
+
+  \# \</weight> 
+ 
+### setMembers(new_members: `Vec<T::AccountId>`, prime: `Option<T::AccountId>`, old_count: `MemberCount`)
 - **interface**: `api.tx.council.setMembers`
 - **summary**:   Set the collective's membership. 
 
-  - `new_members`: The new member list. Be nice to the chain and 
+  - `new_members`: The new member list. Be nice to the chain and provide it sorted. 
 
   - `prime`: The prime member whose vote sets the default.
 
+  - `old_count`: The upper bound for the previous number of members in storage.               Used for weight estimation. 
+
   Requires root origin. 
+
+  NOTE: Does not enforce the expected `MAX_MEMBERS` limit on the amount of members, but       the weight estimations rely on it to estimate dispatchable weight. 
+
+  \# \<weight>
+
+   #### Weight 
+
+  - `O(MP + N)` where:
+
+    - `M` old-members-count (code- and governance-bounded)
+
+    - `N` new-members-count (code- and governance-bounded)
+
+    - `P` proposals-count (code-bounded)
+
+  - DB:
+
+    - 1 storage mutation (codec `O(M)` read, `O(N)` write) for reading and writing the members
+
+    - 1 storage read (codec `O(P)`) for reading the proposals
+
+    - `P` storage mutations (codec `O(M)`) for updating the votes for each proposal
+
+    - 1 storage write (codec `O(1)`) for deleting the old `prime` and setting the new one
+
+  \# \</weight> 
  
 ### vote(proposal: `T::Hash`, index: `Compact<ProposalIndex>`, approve: `bool`)
 - **interface**: `api.tx.council.vote`
-- **summary**:   \# \<weight>
+- **summary**:   Add an aye or nay vote for the sender to the given proposal. 
 
-   
+  Requires the sender to be a member. 
 
-  - Bounded storage read and writes.
+  \# \<weight>
 
-  - Will be slightly heavier if the proposal is approved / disapproved after the vote.
+   #### Weight 
+
+  - `O(M)` where `M` is members-count (code- and governance-bounded)
+
+  - DB:
+
+    - 1 storage read `Members` (codec `O(M)`)
+
+    - 1 storage mutation `Voting` (codec `O(M)`)
+
+  - 1 event
 
   \# \</weight> 
 
@@ -286,7 +390,13 @@ ___
 
    
 
-  - One extra DB entry.
+  - Complexity: `O(1)`
+
+  - Db reads: `Proxy`
+
+  - Db writes: `Proxy`
+
+  - Base Weight: 7.972 µs
 
   \# \</weight> 
  
@@ -302,9 +412,13 @@ ___
 
    
 
-  - One DB change.
+  - `O(D)` where `D` is the items in the dispatch queue. Weighted as `D = 10`.
 
-  - O(d) where d is the items in the dispatch queue.
+  - Db reads: `scheduler lookup`, scheduler agenda`
+
+  - Db writes: `scheduler lookup`, scheduler agenda`
+
+  - Base Weight: 36.78 + 3.277 * D µs
 
   \# \</weight> 
  
@@ -320,7 +434,11 @@ ___
 
    
 
-  - `O(1)`.
+  - Complexity: `O(1)`.
+
+  - Db writes: `ReferendumInfoOf`
+
+  - Base Weight: 21.57 µs
 
   \# \</weight> 
  
@@ -336,7 +454,9 @@ ___
 
   - `O(1)`.
 
-  - One DB clear.
+  - Db writes: `PublicProps`
+
+  - Base Weight: 2.505 µs
 
   \# \</weight> 
  
@@ -352,7 +472,13 @@ ___
 
    
 
-  - One DB clear.
+  - Complexity: `O(1)`
+
+  - Db reads: `Proxy`, `sender account`
+
+  - Db writes: `Proxy`, `sender account`
+
+  - Base Weight: 15.41 µs
 
   \# \</weight> 
  
@@ -372,7 +498,13 @@ ___
 
    
 
-  - One DB clear.
+  - Complexity: `O(1)`
+
+  - Db reads: `Proxy`
+
+  - Db writes: `Proxy`
+
+  - Base Weight: 8.03 µs
 
   \# \</weight> 
  
@@ -400,6 +532,18 @@ ___
 
    
 
+  - Complexity: `O(R)` where R is the number of referendums the voter delegating to has  voted on. Weight is charged as if maximum votes. 
+
+  - Db reads: 2*`VotingOf`, `balances locks`
+
+  - Db writes: 2*`VotingOf`, `balances locks`
+
+  - Db reads per votes: `ReferendumInfoOf`
+
+  - Db writes per votes: `ReferendumInfoOf`
+
+  - Base Weight: 65.78 + 8.229 * R µs
+
   \# \</weight> 
  
 ### emergencyCancel(ref_index: `ReferendumIndex`)
@@ -414,7 +558,15 @@ ___
 
    
 
-  - `O(1)`.
+  - Complexity: `O(1)`.
+
+  - Db reads: `ReferendumInfoOf`, `Cancellations`
+
+  - Db writes: `ReferendumInfoOf`, `Cancellations`
+
+  -------------
+
+  - Base Weight: 34.25 µs
 
   \# \</weight> 
  
@@ -434,9 +586,13 @@ ___
 
    
 
-  - `O(1)`.
+  - Complexity `O(V)` with V number of vetoers in the blacklist of proposal.  Decoding vec of length V. Charged as maximum 
 
-  - One DB change.
+  - Db reads: `NextExternal`, `Blacklist`
+
+  - Db writes: `NextExternal`
+
+  - Base Weight: 13.8 + .106 * V µs
 
   \# \</weight> 
  
@@ -454,9 +610,11 @@ ___
 
    
 
-  - `O(1)`.
+  - Complexity: `O(1)`
 
-  - One DB change.
+  - Db write: `NextExternal`
+
+  - Base Weight: 3.087 µs
 
   \# \</weight> 
  
@@ -474,9 +632,11 @@ ___
 
    
 
-  - `O(1)`.
+  - Complexity: `O(1)`
 
-  - One DB change.
+  - Db write: `NextExternal`
+
+  - Base Weight: 3.065 µs
 
   \# \</weight> 
  
@@ -498,11 +658,13 @@ ___
 
    
 
-  - One DB clear.
+  - Complexity: `O(1)`
 
-  - One DB change.
+  - Db reads: `NextExternal`, `ReferendumCount`
 
-  - One extra DB entry.
+  - Db writes: `NextExternal`, `ReferendumCount`, `ReferendumInfoOf`
+
+  - Base Weight: 30.1 µs
 
   \# \</weight> 
  
@@ -520,7 +682,13 @@ ___
 
    
 
-  - Dependent on the size of `encoded_proposal` and length of dispatch queue.
+  - Complexity: `O(E)` with E size of `encoded_proposal` (protected by a required deposit).
+
+  - Db reads: `Preimages`
+
+  - Db writes: `Preimages`
+
+  - Base Weight: 28.04 + .003 * b µs
 
   \# \</weight> 
  
@@ -538,7 +706,13 @@ ___
 
    
 
-  - Dependent on the size of `encoded_proposal` but protected by a  required deposit. 
+  - Complexity: `O(E)` with E size of `encoded_proposal` (protected by a required deposit).
+
+  - Db reads: `Preimages`
+
+  - Db writes: `Preimages`
+
+  - Base Weight: 37.93 + .004 * b µs
 
   \# \</weight> 
  
@@ -558,7 +732,13 @@ ___
 
    
 
-  - One extra DB entry.
+  - Complexity: O(1)
+
+  - Db reads: `Proxy`, `proxy account`
+
+  - Db writes: `Proxy`, `proxy account`
+
+  - Base Weight: 14.86 µs
 
   \# \</weight> 
  
@@ -578,11 +758,13 @@ ___
 
    
 
-  - `O(P)`
+  - Complexity: `O(1)`
 
-  - P is the number proposals in the `PublicProps` vec.
+  - Db reads: `PublicPropCount`, `PublicProps`
 
-  - Two DB changes, one DB entry.
+  - Db writes: `PublicPropCount`, `PublicProps`, `DepositOf`
+
+  -------------------Base Weight: 42.58 + .127 * P µs with `P` the number of proposals `PublicProps` 
 
   \# \</weight> 
  
@@ -610,7 +792,13 @@ ___
 
   \# \<weight>
 
-   
+   same as `delegate with additional: 
+
+  - Db reads: `Proxy`, `proxy account`
+
+  - Db writes: `proxy account`
+
+  - Base Weight: 68.61 + 8.039 * R µs
 
   \# \</weight> 
  
@@ -628,7 +816,13 @@ ___
 
    
 
-  - `O(R + log R)` where R is the number of referenda that `target` has voted on.
+  - `O(R + log R)` where R is the number of referenda that `target` has voted on.  Weight is calculated for the maximum number of vote. 
+
+  - Db reads: `ReferendumInfoOf`, `VotingOf`, `Proxy`
+
+  - Db writes: `ReferendumInfoOf`, `VotingOf`
+
+  - Base Weight: 26.35 + .36 * R µs
 
   \# \</weight> 
  
@@ -644,9 +838,7 @@ ___
 
   \# \<weight>
 
-   
-
-  - O(1).
+   same as `undelegate with additional: Db reads: `Proxy` Base Weight: 39 + 7.958 * R µs 
 
   \# \</weight> 
  
@@ -664,19 +856,31 @@ ___
 
    
 
-  - `O(1)`.
+  - Complexity: `O(R)` where R is the number of referendums the proxy has voted on.  weight is charged as if maximum votes. 
 
-  - One DB change, one DB entry.
+  - Db reads: `ReferendumInfoOf`, `VotingOf`, `balances locks`, `Proxy`, `proxy account`
+
+  - Db writes: `ReferendumInfoOf`, `VotingOf`, `balances locks`
+
+  ------------
+
+  - Base Weight:
+
+      - Proxy Vote New: 54.35 + .344 * R µs
+
+      - Proxy Vote Existing: 54.35 + .35 * R µs
 
   \# \</weight> 
  
-### reapPreimage(proposal_hash: `T::Hash`)
+### reapPreimage(proposal_hash: `T::Hash`, proposal_len_upper_bound: `Compact<u32>`)
 - **interface**: `api.tx.democracy.reapPreimage`
 - **summary**:   Remove an expired proposal preimage and collect the deposit. 
 
   The dispatch origin of this call must be _Signed_. 
 
   - `proposal_hash`: The preimage hash of a proposal. 
+
+  - `proposal_length_upper_bound`: an upper bound on length of the proposal.  Extrinsic is weighted according to this value with no refund. 
 
   This will only work after `VotingPeriod` blocks from the time that the preimage was noted, if it's the same account doing it. If it's a different account, then it'll only work an additional `EnactmentPeriod` later. 
 
@@ -686,7 +890,13 @@ ___
 
    
 
-  - One DB clear.
+  - Complexity: `O(D)` where D is length of proposal.
+
+  - Db reads: `Preimages`
+
+  - Db writes: `Preimages`
+
+  - Base Weight: 39.31 + .003 * b µs
 
   \# \</weight> 
  
@@ -706,7 +916,13 @@ ___
 
    
 
-  - `O(R + log R)` where R is the number of referenda that `target` has voted on.
+  - `O(R + log R)` where R is the number of referenda that `target` has voted on.  Weight is calculated for the maximum number of vote. 
+
+  - Db reads: `ReferendumInfoOf`, `VotingOf`
+
+  - Db writes: `ReferendumInfoOf`, `VotingOf`
+
+  - Base Weight: 19.15 + .372 * R
 
   \# \</weight> 
  
@@ -746,11 +962,17 @@ ___
 
    
 
-  - `O(R + log R)` where R is the number of referenda that `target` has voted on.
+  - `O(R + log R)` where R is the number of referenda that `target` has voted on.  Weight is calculated for the maximum number of vote. 
+
+  - Db reads: `ReferendumInfoOf`, `VotingOf`
+
+  - Db writes: `ReferendumInfoOf`, `VotingOf`
+
+  - Base Weight: 21.03 + .359 * R
 
   \# \</weight> 
  
-### second(proposal: `Compact<PropIndex>`)
+### second(proposal: `Compact<PropIndex>`, seconds_upper_bound: `Compact<u32>`)
 - **interface**: `api.tx.democracy.second`
 - **summary**:   Signals agreement with a particular proposal. 
 
@@ -758,15 +980,21 @@ ___
 
   - `proposal`: The index of the proposal to second. 
 
+  - `seconds_upper_bound`: an upper bound on the current number of seconds on this  proposal. Extrinsic is weighted according to this value with no refund. 
+
   \# \<weight>
 
    
 
-  - `O(S)`.
+  - Complexity: `O(S)` where S is the number of seconds a proposal already has.
 
-  - S is the number of seconds a proposal already has.
+  - Db reads: `DepositOf`
 
-  - One DB entry.
+  - Db writes: `DepositOf`
+
+  ---------
+
+  - Base Weight: 22.28 + .229 * S µs
 
   \# \</weight> 
  
@@ -784,7 +1012,17 @@ ___
 
    
 
-  - O(1).
+  - Complexity: `O(R)` where R is the number of referendums the voter delegating to has  voted on. Weight is charged as if maximum votes. 
+
+  - Db reads: 2*`VotingOf`
+
+  - Db writes: 2*`VotingOf`
+
+  - Db reads per votes: `ReferendumInfoOf`
+
+  - Db writes per votes: `ReferendumInfoOf`
+
+  - Base Weight: 33.29 + 8.104 * R µs
 
   \# \</weight> 
  
@@ -800,7 +1038,17 @@ ___
 
    
 
-  - `O(1)`.
+  - Complexity `O(R)` with R number of vote of target.
+
+  - Db reads: `VotingOf`, `balances locks`, `target account`
+
+  - Db writes: `VotingOf`, `balances locks`, `target account`
+
+  - Base Weight:
+
+      - Unlock Remove: 42.96 + .048 * R
+
+      - Unlock Set: 37.63 + .327 * R
 
   \# \</weight> 
  
@@ -818,13 +1066,13 @@ ___
 
    
 
-  - Two DB entries.
+  - Complexity: `O(V + log(V))` where V is number of `existing vetoers`  Performs a binary search on `existing_vetoers` which should not be very large. 
 
-  - One DB clear.
+  - Db reads: `NextExternal`, `Blacklist`
 
-  - Performs a binary search on `existing_vetoers` which should not  be very large. 
+  - Db writes: `NextExternal`, `Blacklist`
 
-  - O(log v), v is number of `existing_vetoers`
+  - Base Weight: 29.87 + .188 * V µs
 
   \# \</weight> 
  
@@ -842,11 +1090,19 @@ ___
 
    
 
-  - `O(R)`.
+  - Complexity: `O(R)` where R is the number of referendums the voter has voted on.  weight is charged as if maximum votes. 
 
-  - R is the number of referendums the voter has voted on.
+  - Db reads: `ReferendumInfoOf`, `VotingOf`, `balances locks`
 
-  - One DB change, one DB entry.
+  - Db writes: `ReferendumInfoOf`, `VotingOf`, `balances locks`
+
+  --------------------
+
+  - Base Weight:
+
+      - Vote New: 49.24 + .333 * R µs
+
+      - Vote Existing: 49.94 + .343 * R µs
 
   \# \</weight> 
 
@@ -855,7 +1111,7 @@ ___
 
 ## elections
  
-### removeMember(who: `<T::Lookup as StaticLookup>::Source`)
+### removeMember(who: `<T::Lookup as StaticLookup>::Source`, has_replacement: `bool`)
 - **interface**: `api.tx.elections.removeMember`
 - **summary**:   Remove a particular member from the set. This is effective immediately and the bond of the outgoing member is slashed. 
 
@@ -865,7 +1121,19 @@ ___
 
   \# \<weight>
 
-   #### State Reads: O(do_phragmen) Writes: O(do_phragmen) 
+   If we have a replacement: 
+
+  	- Base weight: 50.93 µs
+
+  	- State reads:
+
+  		- RunnersUp.len()
+
+  		- Members, RunnersUp (remove_and_replace_member)
+
+  	- State writes:
+
+  		- Members, RunnersUp (remove_and_replace_member)Else, since this is a root call and will go into phragmen, we assume full block for now. 
 
   \# \</weight> 
  
@@ -875,35 +1143,89 @@ ___
 
   \# \<weight>
 
-   #### State Reads: O(1) Writes: O(1) 
+   Base weight: 36.8 µs All state access is from do_remove_voter. State reads: 
+
+  	- Voting
+
+  	- [AccountData(who)]State writes: 
+
+  	- Voting
+
+  	- Locks
+
+  	- [AccountData(who)]
 
   \# \</weight> 
  
-### renounceCandidacy()
+### renounceCandidacy(renouncing: `Renouncing`)
 - **interface**: `api.tx.elections.renounceCandidacy`
 - **summary**:   Renounce one's intention to be a candidate for the next election round. 3 potential outcomes exist: 
 
   - `origin` is a candidate and not elected in any set. In this case, the bond is  unreserved, returned and origin is removed as a candidate. 
 
-  - `origin` is a current runner up. In this case, the bond is unreserved, returned and  origin is removed as a runner. 
+  - `origin` is a current runner-up. In this case, the bond is unreserved, returned and  origin is removed as a runner-up. 
 
-  - `origin` is a current member. In this case, the bond is unreserved and origin is  removed as a member, consequently not being a candidate for the next round anymore.   Similar to [`remove_voter`], if replacement runners exists, they are immediately used. 
+  - `origin` is a current member. In this case, the bond is unreserved and origin is  removed as a member, consequently not being a candidate for the next round anymore.   Similar to [`remove_voter`], if replacement runners exists, they are immediately used. <weight> If a candidate is renouncing: 	Base weight: 17.28 µs 	Complexity of candidate_count: 0.235 µs 	State reads: 
+
+  		- Candidates
+
+  		- [AccountBalance(who) (unreserve)]	State writes: 
+
+  		- Candidates
+
+  		- [AccountBalance(who) (unreserve)]If member is renouncing: 	Base weight: 46.25 µs 	State reads: 
+
+  		- Members, RunnersUp (remove_and_replace_member),
+
+  		- [AccountData(who) (unreserve)]	State writes: 
+
+  		- Members, RunnersUp (remove_and_replace_member),
+
+  		- [AccountData(who) (unreserve)]If runner is renouncing: 	Base weight: 46.25 µs 	State reads: 
+
+  		- RunnersUp (remove_and_replace_member),
+
+  		- [AccountData(who) (unreserve)]	State writes: 
+
+  		- RunnersUp (remove_and_replace_member),
+
+  		- [AccountData(who) (unreserve)]
+
+  Weight note: The call into changeMembers need to be accounted for. </weight> 
  
-### reportDefunctVoter(target: `<T::Lookup as StaticLookup>::Source`)
+### reportDefunctVoter(defunct: `DefunctVoter<<T::Lookup as StaticLookup>::Source>`)
 - **interface**: `api.tx.elections.reportDefunctVoter`
 - **summary**:   Report `target` for being an defunct voter. In case of a valid report, the reporter is rewarded by the bond amount of `target`. Otherwise, the reporter itself is removed and their bond is slashed. 
 
   A defunct voter is defined to be: 
 
-    - a voter whose current submitted votes are all invalid. i.e. all of them are no    longer a candidate nor an active member. 
+    - a voter whose current submitted votes are all invalid. i.e. all of them are no    longer a candidate nor an active member or a runner-up. 
+
+  
+
+  The origin must provide the number of current candidates and votes of the reported target for the purpose of accurate weight calculation. 
 
   \# \<weight>
 
-   #### State Reads: O(NLogM) given M current candidates and N votes for `target`. Writes: O(1) 
+   No Base weight based on min square analysis. Complexity of candidate_count: 1.755 µs Complexity of vote_count: 18.51 µs State reads: 
+
+   	- Voting(reporter)
+
+   	- Candidate.len()
+
+   	- Voting(Target)
+
+   	- Candidates, Members, RunnersUp (is_defunct_voter)State writes: 
+
+  	- Lock(reporter || target)
+
+  	- [AccountBalance(reporter)] + AccountBalance(target)
+
+  	- Voting(reporter || target)Note: the db access is worse with respect to db, which is when the report is correct. 
 
   \# \</weight> 
  
-### submitCandidacy()
+### submitCandidacy(candidate_count: `Compact<u32>`)
 - **interface**: `api.tx.elections.submitCandidacy`
 - **summary**:   Submit oneself for candidacy. 
 
@@ -917,25 +1239,53 @@ ___
 
   \# \<weight>
 
-   #### State Reads: O(LogN) Given N candidates. Writes: O(1) 
+   Base weight = 33.33 µs Complexity of candidate_count: 0.375 µs State reads: 
+
+  	- Candidates.len()
+
+  	- Candidates
+
+  	- Members
+
+  	- RunnersUp
+
+  	- [AccountBalance(who)]State writes: 
+
+  	- [AccountBalance(who)]
+
+  	- Candidates
 
   \# \</weight> 
  
 ### vote(votes: `Vec<T::AccountId>`, value: `Compact<BalanceOf<T>>`)
 - **interface**: `api.tx.elections.vote`
-- **summary**:   Vote for a set of candidates for the upcoming round of election. 
+- **summary**:   Vote for a set of candidates for the upcoming round of election. This can be called to set the initial votes, or update already existing votes. 
+
+  Upon initial voting, `value` units of `who`'s balance is locked and a bond amount is reserved. 
 
   The `votes` should: 
 
     - not be empty.
 
-    - be less than the number of candidates.
+    - be less than the number of possible candidates. Note that all current members and    runners-up are also automatically candidates for the next round. 
 
-  Upon voting, `value` units of `who`'s balance is locked and a bond amount is reserved. It is the responsibility of the caller to not place all of their balance into the lock and keep some for further transactions. 
+  It is the responsibility of the caller to not place all of their balance into the lock and keep some for further transactions. 
 
   \# \<weight>
 
-   #### State Reads: O(1) Writes: O(V) given `V` votes. V is bounded by 16. 
+   Base weight: 47.93 µs State reads: 
+
+  	- Candidates.len() + Members.len() + RunnersUp.len()
+
+  	- Voting (is_voter)
+
+  	- [AccountBalance(who) (unreserve + total_balance)]State writes: 
+
+  	- Voting
+
+  	- Lock
+
+  	- [AccountBalance(who) (unreserve -- only when creating a new voter)]
 
   \# \</weight> 
 
@@ -2243,6 +2593,12 @@ ___
 
   NOTE: Two of the storage writes (`Self::bonded`, `Self::payee`) are _never_ cleaned unless the `origin` falls below _existential deposit_ and gets removed as dust. 
 
+  ------------------Base Weight: 67.87 µs DB Weight: 
+
+  - Read: Bonded, Ledger, [Origin Account], Current Era, History Depth, Locks
+
+  - Write: Bonded, Payee, [Origin Account], Locks, Ledger
+
   \# \</weight> 
  
 ### bondExtra(max_additional: `Compact<BalanceOf<T>>`)
@@ -2265,17 +2621,31 @@ ___
 
   - One DB entry.
 
+  ------------Base Weight: 54.88 µs DB Weight: 
+
+  - Read: Era Election Status, Bonded, Ledger, [Origin Account], Locks
+
+  - Write: [Origin Account], Locks, Ledger
+
   \# \</weight> 
  
 ### cancelDeferredSlash(era: `EraIndex`, slash_indices: `Vec<u32>`)
 - **interface**: `api.tx.staking.cancelDeferredSlash`
-- **summary**:   Cancel enactment of a deferred slash. Can be called by either the root origin or the `T::SlashCancelOrigin`. passing the era and indices of the slashes for that era to kill. 
+- **summary**:   Cancel enactment of a deferred slash. 
+
+  Can be called by either the root origin or the `T::SlashCancelOrigin`. 
+
+  Parameters: era and indices of the slashes for that era to kill. 
 
   \# \<weight>
 
-   
+   Complexity: O(U + S) with U unapplied slashes weighted with U=1000 and S is the number of slash indices to be canceled. 
 
-  - One storage write.
+  - Base: 5870 + 34.61 * S µs
+
+  - Read: Unapplied Slashes
+
+  - Write: Unapplied Slashes
 
   \# \</weight> 
  
@@ -2297,17 +2667,29 @@ ___
 
   - Writes are limited to the `origin` account key.
 
+  --------Base Weight: 16.53 µs DB Weight: 
+
+  - Read: EraElectionStatus, Ledger
+
+  - Write: Validators, Nominators
+
   \# \</weight> 
  
 ### forceNewEra()
 - **interface**: `api.tx.staking.forceNewEra`
 - **summary**:   Force there to be a new era at the end of the next session. After this, it will be reset to normal (non-forced) behaviour. 
 
+  The dispatch origin must be Root. 
+
   \# \<weight>
 
    
 
   - No arguments.
+
+  - Base Weight: 1.959 µs
+
+  - Write ForceEra
 
   \# \</weight> 
  
@@ -2315,11 +2697,15 @@ ___
 - **interface**: `api.tx.staking.forceNewEraAlways`
 - **summary**:   Force there to be a new era at the end of sessions indefinitely. 
 
+  The dispatch origin must be Root. 
+
   \# \<weight>
 
    
 
-  - One storage write
+  - Base Weight: 2.05 µs
+
+  - Write: ForceEra
 
   \# \</weight> 
  
@@ -2327,17 +2713,31 @@ ___
 - **interface**: `api.tx.staking.forceNoEras`
 - **summary**:   Force there to be no new eras indefinitely. 
 
+  The dispatch origin must be Root. 
+
   \# \<weight>
 
    
 
   - No arguments.
 
+  - Base Weight: 1.857 µs
+
+  - Write: ForceEra
+
   \# \</weight> 
  
-### forceUnstake(stash: `T::AccountId`)
+### forceUnstake(stash: `T::AccountId`, num_slashing_spans: `u32`)
 - **interface**: `api.tx.staking.forceUnstake`
 - **summary**:   Force a current staker to become completely unstaked, immediately. 
+
+  The dispatch origin must be Root. 
+
+  \# \<weight>
+
+   O(S) where S is the number of slashing spans to be removed Base Weight: 53.07 + 2.365 * S µs Reads: Bonded, Slashing Spans, Account, Locks Writes: Bonded, Slashing Spans (if S > 0), Ledger, Payee, Validators, Nominators, Account, Locks Writes Each: SpanSlash * S 
+
+  \# \</weight> 
  
 ### nominate(targets: `Vec<<T::Lookup as StaticLookup>::Source>`)
 - **interface**: `api.tx.staking.nominate`
@@ -2351,9 +2751,15 @@ ___
 
    
 
-  - The transaction's complexity is proportional to the size of `targets`,which is capped at CompactAssignments::LIMIT. 
+  - The transaction's complexity is proportional to the size of `targets` (N)which is capped at CompactAssignments::LIMIT (MAX_NOMINATIONS). 
 
   - Both the reads and writes follow a similar pattern.
+
+  ---------Base Weight: 22.34 + .36 * N µs where N is the number of targets DB Weight: 
+
+  - Reads: Era Election Status, Ledger, Current Era
+
+  - Writes: Validators, Nominators
 
   \# \</weight> 
  
@@ -2407,6 +2813,14 @@ ___
 
   - Contains a limited number of reads and writes.
 
+  -----------N is the Number of payouts for the validator (including the validator) Base Weight: 110 + 54.2 * N µs (Median Slopes) DB Weight: 
+
+  - Read: EraElectionStatus, CurrentEra, HistoryDepth, MigrateEra, ErasValidatorReward,        ErasStakersClipped, ErasRewardPoints, ErasValidatorPrefs (8 items) 
+
+  - Read Each: Bonded, Ledger, Payee, Locks, System Account (5 items)
+
+  - Write Each: System Account, Locks, Ledger (3 items)
+
   \# \</weight> 
  
 ### payoutValidator(era: `EraIndex`)
@@ -2435,13 +2849,25 @@ ___
 
   \# \</weight> 
  
-### reapStash(stash: `T::AccountId`)
+### reapStash(stash: `T::AccountId`, num_slashing_spans: `u32`)
 - **interface**: `api.tx.staking.reapStash`
 - **summary**:   Remove all data structure concerning a staker/stash once its balance is zero. This is essentially equivalent to `withdraw_unbonded` except it can be called by anyone and the target `stash` must have no funds left. 
 
   This can be called from any origin. 
 
   - `stash`: The stash account to reap. Its balance must be zero. 
+
+  \# \<weight>
+
+   Complexity: O(S) where S is the number of slashing spans on the account. Base Weight: 75.94 + 2.396 * S µs DB Weight: 
+
+  - Reads: Stash Account, Bonded, Slashing Spans, Locks
+
+  - Writes: Bonded, Slashing Spans (if S > 0), Ledger, Payee, Validators, Nominators, Stash Account, Locks
+
+  - Writes Each: SpanSlash * S
+
+  \# \</weight> 
  
 ### rebond(value: `Compact<BalanceOf<T>>`)
 - **interface**: `api.tx.staking.rebond`
@@ -2453,9 +2879,21 @@ ___
 
    
 
-  - Time complexity: O(1). Bounded by `MAX_UNLOCKING_CHUNKS`.
+  - Time complexity: O(L), where L is unlocking chunks
+
+  - Bounded by `MAX_UNLOCKING_CHUNKS`.
 
   - Storage changes: Can't increase storage, only decrease it.
+
+  ---------------
+
+  - Base Weight: 34.51 µs * .048 L µs
+
+  - DB Weight:
+
+      - Reads: EraElectionStatus, Ledger, Locks, [Origin Account]
+
+      - Writes: [Origin Account], Locks, Ledger
 
   \# \</weight> 
  
@@ -2477,17 +2915,63 @@ ___
 
   - Writes are limited to the `origin` account key.
 
+  ----------Base Weight: 25.22 µs DB Weight: 
+
+  - Read: Bonded, Ledger New Controller, Ledger Old Controller
+
+  - Write: Bonded, Ledger New Controller, Ledger Old Controller
+
   \# \</weight> 
  
-### setHistoryDepth(new_history_depth: `Compact<EraIndex>`)
+### setHistoryDepth(new_history_depth: `Compact<EraIndex>`, _era_items_deleted: `Compact<u32>`)
 - **interface**: `api.tx.staking.setHistoryDepth`
-- **summary**:   Set history_depth value. 
+- **summary**:   Set `HistoryDepth` value. This function will delete any history information when `HistoryDepth` is reduced. 
+
+  Parameters: 
+
+  - `new_history_depth`: The new history depth you would like to set.
+
+  - `era_items_deleted`: The number of items that will be deleted by this dispatch.   This should report all the storage items that will be deleted by clearing old    era history. Needed to report an accurate weight for the dispatch. Trusted by    `Root` to report an accurate number. 
 
   Origin must be root. 
+
+  \# \<weight>
+
+   
+
+  - E: Number of history depths removed, i.e. 10 -> 7 = 3
+
+  - Base Weight: 29.13 * E µs
+
+  - DB Weight:
+
+      - Reads: Current Era, History Depth
+
+      - Writes: History Depth
+
+      - Clear Prefix Each: Era Stakers, EraStakersClipped, ErasValidatorPrefs
+
+      - Writes Each: ErasValidatorReward, ErasRewardPoints, ErasTotalStake, ErasStartSessionIndex
+
+  \# \</weight> 
  
 ### setInvulnerables(validators: `Vec<T::AccountId>`)
 - **interface**: `api.tx.staking.setInvulnerables`
 - **summary**:   Set the validators who cannot be slashed (if any). 
+
+  The dispatch origin must be Root. 
+
+  \# \<weight>
+
+   
+
+  - O(V)
+
+  - Base Weight: 2.208 + .006 * V µs
+
+  - Write: Invulnerables
+
+  \# \</weight> 
  
 ### setPayee(payee: `RewardDestination`)
 - **interface**: `api.tx.staking.setPayee`
@@ -2507,11 +2991,29 @@ ___
 
   - Writes are limited to the `origin` account key.
 
+  ---------
+
+  - Base Weight: 11.33 µs
+
+  - DB Weight:
+
+      - Read: Ledger
+
+      - Write: Payee
+
   \# \</weight> 
  
 ### setValidatorCount(new: `Compact<u32>`)
 - **interface**: `api.tx.staking.setValidatorCount`
-- **summary**:   The ideal number of validators. 
+- **summary**:   Sets the ideal number of validators. 
+
+  The dispatch origin must be Root. 
+
+  \# \<weight>
+
+   Base Weight: 1.717 µs Write: Validator Count 
+
+  \# \</weight> 
  
 ### submitElectionSolution(winners: `Vec<ValidatorIndex>`, compact_assignments: `CompactAssignments`, score: `PhragmenScore`, era: `EraIndex`)
 - **interface**: `api.tx.staking.submitElectionSolution`
@@ -2611,7 +3113,13 @@ ___
 
   - Each call (requires the remainder of the bonded balance to be above `minimum_balance`)  will cause a new entry to be inserted into a vector (`Ledger.unlocking`) kept in storage.   The only way to clean the aforementioned storage item is also user-controlled via   `withdraw_unbonded`. 
 
-  - One DB entry.</weight> 
+  - One DB entry.
+
+  ----------Base Weight: 50.34 µs DB Weight: 
+
+  - Read: Era Election Status, Ledger, Current Era, Locks, [Origin Account]
+
+  - Write: [Origin Account], Locks, Ledger</weight> 
  
 ### validate(prefs: `ValidatorPrefs`)
 - **interface**: `api.tx.staking.validate`
@@ -2631,9 +3139,15 @@ ___
 
   - Writes are limited to the `origin` account key.
 
+  -----------Base Weight: 17.13 µs DB Weight: 
+
+  - Read: Era Election Status, Ledger
+
+  - Write: Nominators, Validators
+
   \# \</weight> 
  
-### withdrawUnbonded()
+### withdrawUnbonded(num_slashing_spans: `u32`)
 - **interface**: `api.tx.staking.withdrawUnbonded`
 - **summary**:   Remove any unlocked chunks from the `unlocking` queue from our management. 
 
@@ -2654,6 +3168,18 @@ ___
   - Contains a limited number of reads, yet the size of which could be large based on `ledger`.
 
   - Writes are limited to the `origin` account key.
+
+  ---------------Complexity O(S) where S is the number of slashing spans to remove Base Weight: Update: 50.52 + .028 * S µs 
+
+  - Reads: EraElectionStatus, Ledger, Current Era, Locks, [Origin Account]
+
+  - Writes: [Origin Account], Locks, LedgerKill: 79.41 + 2.366 * S µs 
+
+  - Reads: EraElectionStatus, Ledger, Current Era, Bonded, Slashing Spans, [Origin Account], Locks
+
+  - Writes: Bonded, Slashing Spans (if S > 0), Ledger, Payee, Validators, Nominators, [Origin Account], Locks
+
+  - Writes Each: SpanSlash * SNOTE: Weight annotation is the kill scenario, we refund otherwise. 
 
   \# \</weight> 
 
@@ -2912,63 +3438,167 @@ ___
 
 ## technicalCommittee
  
-### close(proposal: `T::Hash`, index: `Compact<ProposalIndex>`)
+### close(proposal: `T::Hash`, index: `Compact<ProposalIndex>`, proposal_weight_bound: `Compact<Weight>`, length_bound: `Compact<u32>`)
 - **interface**: `api.tx.technicalCommittee.close`
-- **summary**:   May be called by any signed account after the voting duration has ended in order to finish voting and close the proposal. 
+- **summary**:   Close a vote that is either approved, disapproved or whose voting period has ended. 
 
-  Abstentions are counted as rejections unless there is a prime member set and the prime member cast an approval. 
+  May be called by any signed account in order to finish voting and close the proposal. 
 
-  - the weight of `proposal` preimage. 
+  If called before the end of the voting period it will only close the vote if it is has enough votes to be approved or disapproved. 
 
-  - up to three events deposited.
+  If called after the end of the voting period abstentions are counted as rejections unless there is a prime member set and the prime member cast an approval. 
 
-  - one read, two removals, one mutation. (plus three static reads.)
+  + `proposal_weight_bound`: The maximum amount of weight consumed by executing the closed proposal. + `length_bound`: The upper bound for the length of the proposal in storage. Checked via                   `storage::read` so it is `size_of::<u32>() == 4` larger than the pure length. 
 
-  - computation and i/o `O(P + L + M)` where:
+  \# \<weight>
 
-    - `M` is number of members,
+   #### Weight 
 
-    - `P` is number of active proposals,
+  - `O(B + M + P1 + P2)` where:
 
-    - `L` is the encoded length of `proposal` preimage.
+    - `B` is `proposal` size in bytes (length-fee-bounded)
+
+    - `M` is members-count (code- and governance-bounded)
+
+    - `P1` is the complexity of `proposal` preimage.
+
+    - `P2` is proposal-count (code-bounded)
+
+  - DB:
+
+   - 2 storage reads (`Members`: codec `O(M)`, `Prime`: codec `O(1)`)
+
+   - 3 mutations (`Voting`: codec `O(M)`, `ProposalOf`: codec `O(B)`, `Proposals`: codec `O(P2)`)
+
+   - any mutations done while executing `proposal` (`P1`)
+
+  - up to 3 events
+
+  \# \</weight> 
  
-### execute(proposal: `Box<<T as Trait<I>>::Proposal>`)
+### execute(proposal: `Box<<T as Trait<I>>::Proposal>`, length_bound: `Compact<u32>`)
 - **interface**: `api.tx.technicalCommittee.execute`
 - **summary**:   Dispatch a proposal from a member using the `Member` origin. 
 
   Origin must be a member of the collective. 
- 
-### propose(threshold: `Compact<MemberCount>`, proposal: `Box<<T as Trait<I>>::Proposal>`)
-- **interface**: `api.tx.technicalCommittee.propose`
-- **summary**:   \# \<weight>
 
-   
+  \# \<weight>
 
-  - Bounded storage reads and writes.
+   #### Weight 
 
-  - Argument `threshold` has bearing on weight.
+  - `O(M + P)` where `M` members-count (code-bounded) and `P` complexity of dispatching `proposal`
+
+  - DB: 1 read (codec `O(M)`) + DB access of `proposal`
+
+  - 1 event
 
   \# \</weight> 
  
-### setMembers(new_members: `Vec<T::AccountId>`, prime: `Option<T::AccountId>`)
+### propose(threshold: `Compact<MemberCount>`, proposal: `Box<<T as Trait<I>>::Proposal>`, length_bound: `Compact<u32>`)
+- **interface**: `api.tx.technicalCommittee.propose`
+- **summary**:   Add a new proposal to either be voted on or executed directly. 
+
+  Requires the sender to be member. 
+
+  `threshold` determines whether `proposal` is executed directly (`threshold < 2`) or put up for voting. 
+
+  \# \<weight>
+
+   #### Weight 
+
+  - `O(B + M + P1)` or `O(B + M + P2)` where:
+
+    - `B` is `proposal` size in bytes (length-fee-bounded)
+
+    - `M` is members-count (code- and governance-bounded)
+
+    - branching is influenced by `threshold` where:
+
+      - `P1` is proposal execution complexity (`threshold < 2`)
+
+      - `P2` is proposals-count (code-bounded) (`threshold >= 2`)
+
+  - DB:
+
+    - 1 storage read `is_member` (codec `O(M)`)
+
+    - 1 storage read `ProposalOf::contains_key` (codec `O(1)`)
+
+    - DB accesses influenced by `threshold`:
+
+      - EITHER storage accesses done by `proposal` (`threshold < 2`)
+
+      - OR proposal insertion (`threshold <= 2`)
+
+        - 1 storage mutation `Proposals` (codec `O(P2)`)
+
+        - 1 storage mutation `ProposalCount` (codec `O(1)`)
+
+        - 1 storage write `ProposalOf` (codec `O(B)`)
+
+        - 1 storage write `Voting` (codec `O(M)`)
+
+    - 1 event
+
+  \# \</weight> 
+ 
+### setMembers(new_members: `Vec<T::AccountId>`, prime: `Option<T::AccountId>`, old_count: `MemberCount`)
 - **interface**: `api.tx.technicalCommittee.setMembers`
 - **summary**:   Set the collective's membership. 
 
-  - `new_members`: The new member list. Be nice to the chain and 
+  - `new_members`: The new member list. Be nice to the chain and provide it sorted. 
 
   - `prime`: The prime member whose vote sets the default.
 
+  - `old_count`: The upper bound for the previous number of members in storage.               Used for weight estimation. 
+
   Requires root origin. 
+
+  NOTE: Does not enforce the expected `MAX_MEMBERS` limit on the amount of members, but       the weight estimations rely on it to estimate dispatchable weight. 
+
+  \# \<weight>
+
+   #### Weight 
+
+  - `O(MP + N)` where:
+
+    - `M` old-members-count (code- and governance-bounded)
+
+    - `N` new-members-count (code- and governance-bounded)
+
+    - `P` proposals-count (code-bounded)
+
+  - DB:
+
+    - 1 storage mutation (codec `O(M)` read, `O(N)` write) for reading and writing the members
+
+    - 1 storage read (codec `O(P)`) for reading the proposals
+
+    - `P` storage mutations (codec `O(M)`) for updating the votes for each proposal
+
+    - 1 storage write (codec `O(1)`) for deleting the old `prime` and setting the new one
+
+  \# \</weight> 
  
 ### vote(proposal: `T::Hash`, index: `Compact<ProposalIndex>`, approve: `bool`)
 - **interface**: `api.tx.technicalCommittee.vote`
-- **summary**:   \# \<weight>
+- **summary**:   Add an aye or nay vote for the sender to the given proposal. 
 
-   
+  Requires the sender to be a member. 
 
-  - Bounded storage read and writes.
+  \# \<weight>
 
-  - Will be slightly heavier if the proposal is approved / disapproved after the vote.
+   #### Weight 
+
+  - `O(M)` where `M` is members-count (code- and governance-bounded)
+
+  - DB:
+
+    - 1 storage read `Members` (codec `O(M)`)
+
+    - 1 storage mutation `Voting` (codec `O(M)`)
+
+  - 1 event
 
   \# \</weight> 
 

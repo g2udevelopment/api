@@ -2,4 +2,8 @@
 
 # Module: "augment/registry"
 
+## Index
 
+### Modules
+
+* ["registry"](_augment_registry_._registry_.md)

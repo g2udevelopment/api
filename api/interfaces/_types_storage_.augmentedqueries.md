@@ -9,3 +9,5 @@
 ## Hierarchy
 
 * **AugmentedQueries**
+
+  ↳ [QueryableStorage](_augment_query_._api_types_storage_.queryablestorage.md)

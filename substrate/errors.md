@@ -146,8 +146,17 @@ ___
 ### TooEarly
 - **summary**:   The close call is made too early, before the end of the voting. 
  
+### TooManyProposals
+- **summary**:   There can only be a maximum of `MaxProposals` active proposals. 
+ 
 ### WrongIndex
 - **summary**:   Mismatched index 
+ 
+### WrongProposalLength
+- **summary**:   The given length bound for the proposal was too low. 
+ 
+### WrongProposalWeight
+- **summary**:   The given weight bound for the proposal was too low. 
 
 ___
 
@@ -186,6 +195,9 @@ ___
  
 ### InvalidHash
 - **summary**:   Invalid hash 
+ 
+### MaxVotesReached
+- **summary**:   Maximum number of votes reached. 
  
 ### NoneWaiting
 - **summary**:   No proposals waiting 
@@ -264,6 +276,9 @@ ___
  
 ### WrongProxy
 - **summary**:   Wrong proxy 
+ 
+### WrongUpperBound
+- **summary**:   Invalid upper bound. 
 
 ___
 
@@ -276,8 +291,17 @@ ___
 ### InsufficientCandidateFunds
 - **summary**:   Candidate does not have enough funds. 
  
-### InvalidOrigin
-- **summary**:   Origin is not a candidate, member or a runner up. 
+### InvalidCandidateCount
+- **summary**:   The provided count of number of candidates is incorrect. 
+ 
+### InvalidRenouncing
+- **summary**:   The renouncing origin presented a wrong `Renouncing` parameter. 
+ 
+### InvalidReplacement
+- **summary**:   Prediction regarding replacement after member removal is wrong. 
+ 
+### InvalidVoteCount
+- **summary**:   The provided count of number of votes is incorrect. 
  
 ### LowBalance
 - **summary**:   Cannot vote with stake less than minimum balance. 
@@ -556,6 +580,12 @@ ___
 ### FundedTarget
 - **summary**:   Attempting to target a stash that still has funds. 
  
+### IncorrectHistoryDepth
+- **summary**:   Incorrect previous history depth input provided. 
+ 
+### IncorrectSlashingSpans
+- **summary**:   Incorrect number of slashing spans provided. 
+ 
 ### InsufficientValue
 - **summary**:   Can not bond with value less than minimum balance. 
  
@@ -672,8 +702,17 @@ ___
 ### TooEarly
 - **summary**:   The close call is made too early, before the end of the voting. 
  
+### TooManyProposals
+- **summary**:   There can only be a maximum of `MaxProposals` active proposals. 
+ 
 ### WrongIndex
 - **summary**:   Mismatched index 
+ 
+### WrongProposalLength
+- **summary**:   The given length bound for the proposal was too low. 
+ 
+### WrongProposalWeight
+- **summary**:   The given weight bound for the proposal was too low. 
 
 ___
 

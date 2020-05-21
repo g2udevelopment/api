@@ -109,6 +109,10 @@ ___
 
   This entry is populated as part of block execution and is cleaned up on block finalization. Querying this storage entry outside of block execution context should always yield zero. 
  
+### nextEpochConfig(): `Option<NextConfigDescriptor>`
+- **interface**: `api.query.babe.nextEpochConfig`
+- **summary**:   Next epoch configuration, if changed. 
+ 
 ### nextRandomness(): `Randomness`
 - **interface**: `api.query.babe.nextRandomness`
 - **summary**:   Next epoch randomness. 
@@ -226,7 +230,7 @@ ___
 - **interface**: `api.query.democracy.cancellations`
 - **summary**:   Record of all proposals that have been subject to emergency cancellation. 
  
-### depositOf(`PropIndex`): `Option<(BalanceOf,Vec<AccountId>)>`
+### depositOf(`PropIndex`): `Option<(Vec<AccountId>,BalanceOf)>`
 - **interface**: `api.query.democracy.depositOf`
 - **summary**:   Those who have locked a deposit. 
  
@@ -273,6 +277,12 @@ ___
 ### referendumInfoOf(`ReferendumIndex`): `Option<ReferendumInfo>`
 - **interface**: `api.query.democracy.referendumInfoOf`
 - **summary**:   Information concerning any given referendum. 
+ 
+### storageVersion(): `Option<ReleasesDemocracy>`
+- **interface**: `api.query.democracy.storageVersion`
+- **summary**:   Storage version of the pallet. 
+
+  New networks start with last version. 
  
 ### votingOf(`AccountId`): `Voting`
 - **interface**: `api.query.democracy.votingOf`

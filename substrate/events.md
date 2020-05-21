@@ -130,10 +130,10 @@ ___
 ### Disapproved(`Hash`)
 - **summary**:   A motion was not approved by the required threshold. 
  
-### Executed(`Hash`, `bool`)
+### Executed(`Hash`, `DispatchResult`)
 - **summary**:   A motion was executed; `bool` is true if returned without error. 
  
-### MemberExecuted(`Hash`, `bool`)
+### MemberExecuted(`Hash`, `DispatchResult`)
 - **summary**:   A single member did some action; `bool` is true if returned without error. 
  
 ### Proposed(`AccountId`, `ProposalIndex`, `Hash`, `MemberCount`)
@@ -462,10 +462,10 @@ ___
 ### Disapproved(`Hash`)
 - **summary**:   A motion was not approved by the required threshold. 
  
-### Executed(`Hash`, `bool`)
+### Executed(`Hash`, `DispatchResult`)
 - **summary**:   A motion was executed; `bool` is true if returned without error. 
  
-### MemberExecuted(`Hash`, `bool`)
+### MemberExecuted(`Hash`, `DispatchResult`)
 - **summary**:   A single member did some action; `bool` is true if returned without error. 
  
 ### Proposed(`AccountId`, `ProposalIndex`, `Hash`, `MemberCount`)
