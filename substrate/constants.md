@@ -119,6 +119,10 @@ ___
 - **interface**: `api.consts.democracy.launchPeriod`
 - **summary**:   How often (in blocks) new public referenda are launched. 
  
+### maxVotes: `u32`
+- **interface**: `api.consts.democracy.maxVotes`
+- **summary**:   The maximum number of votes for an account. 
+ 
 ### minimumDeposit: `BalanceOf<T>`
 - **interface**: `api.consts.democracy.minimumDeposit`
 - **summary**:   The minimum amount to be used as a deposit for a public referendum proposal. 
@@ -288,6 +292,10 @@ ___
 ### transactionByteFee: `BalanceOf<T>`
 - **interface**: `api.consts.transactionPayment.transactionByteFee`
 - **summary**:   The fee to be paid for making a transaction; the per-byte portion. 
+ 
+### weightToFee: `Vec<WeightToFeeCoefficient<BalanceOf<T>>>`
+- **interface**: `api.consts.transactionPayment.weightToFee`
+- **summary**:   The polynomial that is applied in order to derive fee from weight. 
 
 ___
 

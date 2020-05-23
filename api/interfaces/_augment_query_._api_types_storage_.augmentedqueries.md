@@ -48,7 +48,7 @@
 
 • **authorship**: *object*
 
-*Defined in [api/src/augment/query.ts:34](https://github.com/polkadot-js/api/blob/b0dc7cf451/packages/api/src/augment/query.ts#L34)*
+*Defined in [api/src/augment/query.ts:34](https://github.com/polkadot-js/api/blob/393f46ba4a/packages/api/src/augment/query.ts#L34)*
 
 #### Type declaration:
 
@@ -66,7 +66,7 @@ ___
 
 • **babe**: *object*
 
-*Defined in [api/src/augment/query.ts:49](https://github.com/polkadot-js/api/blob/b0dc7cf451/packages/api/src/augment/query.ts#L49)*
+*Defined in [api/src/augment/query.ts:49](https://github.com/polkadot-js/api/blob/393f46ba4a/packages/api/src/augment/query.ts#L49)*
 
 #### Type declaration:
 
@@ -100,7 +100,7 @@ ___
 
 • **balances**: *object*
 
-*Defined in [api/src/augment/query.ts:116](https://github.com/polkadot-js/api/blob/b0dc7cf451/packages/api/src/augment/query.ts#L116)*
+*Defined in [api/src/augment/query.ts:116](https://github.com/polkadot-js/api/blob/393f46ba4a/packages/api/src/augment/query.ts#L116)*
 
 #### Type declaration:
 
@@ -120,7 +120,7 @@ ___
 
 • **contracts**: *object*
 
-*Defined in [api/src/augment/query.ts:143](https://github.com/polkadot-js/api/blob/b0dc7cf451/packages/api/src/augment/query.ts#L143)*
+*Defined in [api/src/augment/query.ts:143](https://github.com/polkadot-js/api/blob/393f46ba4a/packages/api/src/augment/query.ts#L143)*
 
 #### Type declaration:
 
@@ -142,7 +142,7 @@ ___
 
 • **council**: *object*
 
-*Defined in [api/src/augment/query.ts:166](https://github.com/polkadot-js/api/blob/b0dc7cf451/packages/api/src/augment/query.ts#L166)*
+*Defined in [api/src/augment/query.ts:166](https://github.com/polkadot-js/api/blob/393f46ba4a/packages/api/src/augment/query.ts#L166)*
 
 #### Type declaration:
 
@@ -166,7 +166,7 @@ ___
 
 • **democracy**: *object*
 
-*Defined in [api/src/augment/query.ts:194](https://github.com/polkadot-js/api/blob/b0dc7cf451/packages/api/src/augment/query.ts#L194)*
+*Defined in [api/src/augment/query.ts:194](https://github.com/polkadot-js/api/blob/393f46ba4a/packages/api/src/augment/query.ts#L194)*
 
 #### Type declaration:
 
@@ -208,7 +208,7 @@ ___
 
 • **elections**: *object*
 
-*Defined in [api/src/augment/query.ts:269](https://github.com/polkadot-js/api/blob/b0dc7cf451/packages/api/src/augment/query.ts#L269)*
+*Defined in [api/src/augment/query.ts:269](https://github.com/polkadot-js/api/blob/393f46ba4a/packages/api/src/augment/query.ts#L269)*
 
 #### Type declaration:
 
@@ -230,7 +230,7 @@ ___
 
 • **grandpa**: *object*
 
-*Defined in [api/src/augment/query.ts:293](https://github.com/polkadot-js/api/blob/b0dc7cf451/packages/api/src/augment/query.ts#L293)*
+*Defined in [api/src/augment/query.ts:293](https://github.com/polkadot-js/api/blob/393f46ba4a/packages/api/src/augment/query.ts#L293)*
 
 #### Type declaration:
 
@@ -254,7 +254,7 @@ ___
 
 • **identity**: *object*
 
-*Defined in [api/src/augment/query.ts:322](https://github.com/polkadot-js/api/blob/b0dc7cf451/packages/api/src/augment/query.ts#L322)*
+*Defined in [api/src/augment/query.ts:322](https://github.com/polkadot-js/api/blob/393f46ba4a/packages/api/src/augment/query.ts#L322)*
 
 #### Type declaration:
 
@@ -274,7 +274,7 @@ ___
 
 • **imOnline**: *object*
 
-*Defined in [api/src/augment/query.ts:347](https://github.com/polkadot-js/api/blob/b0dc7cf451/packages/api/src/augment/query.ts#L347)*
+*Defined in [api/src/augment/query.ts:347](https://github.com/polkadot-js/api/blob/393f46ba4a/packages/api/src/augment/query.ts#L347)*
 
 #### Type declaration:
 
@@ -294,7 +294,7 @@ ___
 
 • **indices**: *object*
 
-*Defined in [api/src/augment/query.ts:373](https://github.com/polkadot-js/api/blob/b0dc7cf451/packages/api/src/augment/query.ts#L373)*
+*Defined in [api/src/augment/query.ts:373](https://github.com/polkadot-js/api/blob/393f46ba4a/packages/api/src/augment/query.ts#L373)*
 
 #### Type declaration:
 
@@ -308,7 +308,7 @@ ___
 
 • **offences**: *object*
 
-*Defined in [api/src/augment/query.ts:380](https://github.com/polkadot-js/api/blob/b0dc7cf451/packages/api/src/augment/query.ts#L380)*
+*Defined in [api/src/augment/query.ts:380](https://github.com/polkadot-js/api/blob/393f46ba4a/packages/api/src/augment/query.ts#L380)*
 
 #### Type declaration:
 
@@ -328,7 +328,7 @@ ___
 
 • **randomnessCollectiveFlip**: *object*
 
-*Defined in [api/src/augment/query.ts:405](https://github.com/polkadot-js/api/blob/b0dc7cf451/packages/api/src/augment/query.ts#L405)*
+*Defined in [api/src/augment/query.ts:405](https://github.com/polkadot-js/api/blob/393f46ba4a/packages/api/src/augment/query.ts#L405)*
 
 #### Type declaration:
 
@@ -342,7 +342,7 @@ ___
 
 • **recovery**: *object*
 
-*Defined in [api/src/augment/query.ts:414](https://github.com/polkadot-js/api/blob/b0dc7cf451/packages/api/src/augment/query.ts#L414)*
+*Defined in [api/src/augment/query.ts:414](https://github.com/polkadot-js/api/blob/393f46ba4a/packages/api/src/augment/query.ts#L414)*
 
 #### Type declaration:
 
@@ -360,7 +360,7 @@ ___
 
 • **scheduler**: *object*
 
-*Defined in [api/src/augment/query.ts:434](https://github.com/polkadot-js/api/blob/b0dc7cf451/packages/api/src/augment/query.ts#L434)*
+*Defined in [api/src/augment/query.ts:434](https://github.com/polkadot-js/api/blob/393f46ba4a/packages/api/src/augment/query.ts#L434)*
 
 #### Type declaration:
 
@@ -376,7 +376,7 @@ ___
 
 • **session**: *object*
 
-*Defined in [api/src/augment/query.ts:445](https://github.com/polkadot-js/api/blob/b0dc7cf451/packages/api/src/augment/query.ts#L445)*
+*Defined in [api/src/augment/query.ts:445](https://github.com/polkadot-js/api/blob/393f46ba4a/packages/api/src/augment/query.ts#L445)*
 
 #### Type declaration:
 
@@ -402,7 +402,7 @@ ___
 
 • **society**: *object*
 
-*Defined in [api/src/augment/query.ts:480](https://github.com/polkadot-js/api/blob/b0dc7cf451/packages/api/src/augment/query.ts#L480)*
+*Defined in [api/src/augment/query.ts:480](https://github.com/polkadot-js/api/blob/393f46ba4a/packages/api/src/augment/query.ts#L480)*
 
 #### Type declaration:
 
@@ -446,7 +446,7 @@ ___
 
 • **staking**: *object*
 
-*Defined in [api/src/augment/query.ts:548](https://github.com/polkadot-js/api/blob/b0dc7cf451/packages/api/src/augment/query.ts#L548)*
+*Defined in [api/src/augment/query.ts:548](https://github.com/polkadot-js/api/blob/393f46ba4a/packages/api/src/augment/query.ts#L548)*
 
 #### Type declaration:
 
@@ -530,7 +530,7 @@ ___
 
 • **sudo**: *object*
 
-*Defined in [api/src/augment/query.ts:749](https://github.com/polkadot-js/api/blob/b0dc7cf451/packages/api/src/augment/query.ts#L749)*
+*Defined in [api/src/augment/query.ts:749](https://github.com/polkadot-js/api/blob/393f46ba4a/packages/api/src/augment/query.ts#L749)*
 
 #### Type declaration:
 
@@ -544,7 +544,7 @@ ___
 
 • **system**: *object*
 
-*Defined in [api/src/augment/query.ts:756](https://github.com/polkadot-js/api/blob/b0dc7cf451/packages/api/src/augment/query.ts#L756)*
+*Defined in [api/src/augment/query.ts:756](https://github.com/polkadot-js/api/blob/393f46ba4a/packages/api/src/augment/query.ts#L756)*
 
 #### Type declaration:
 
@@ -586,7 +586,7 @@ ___
 
 • **technicalCommittee**: *object*
 
-*Defined in [api/src/augment/query.ts:828](https://github.com/polkadot-js/api/blob/b0dc7cf451/packages/api/src/augment/query.ts#L828)*
+*Defined in [api/src/augment/query.ts:828](https://github.com/polkadot-js/api/blob/393f46ba4a/packages/api/src/augment/query.ts#L828)*
 
 #### Type declaration:
 
@@ -610,7 +610,7 @@ ___
 
 • **technicalMembership**: *object*
 
-*Defined in [api/src/augment/query.ts:856](https://github.com/polkadot-js/api/blob/b0dc7cf451/packages/api/src/augment/query.ts#L856)*
+*Defined in [api/src/augment/query.ts:856](https://github.com/polkadot-js/api/blob/393f46ba4a/packages/api/src/augment/query.ts#L856)*
 
 #### Type declaration:
 
@@ -626,7 +626,7 @@ ___
 
 • **timestamp**: *object*
 
-*Defined in [api/src/augment/query.ts:867](https://github.com/polkadot-js/api/blob/b0dc7cf451/packages/api/src/augment/query.ts#L867)*
+*Defined in [api/src/augment/query.ts:867](https://github.com/polkadot-js/api/blob/393f46ba4a/packages/api/src/augment/query.ts#L867)*
 
 #### Type declaration:
 
@@ -642,7 +642,7 @@ ___
 
 • **transactionPayment**: *object*
 
-*Defined in [api/src/augment/query.ts:878](https://github.com/polkadot-js/api/blob/b0dc7cf451/packages/api/src/augment/query.ts#L878)*
+*Defined in [api/src/augment/query.ts:878](https://github.com/polkadot-js/api/blob/393f46ba4a/packages/api/src/augment/query.ts#L878)*
 
 #### Type declaration:
 
@@ -656,7 +656,7 @@ ___
 
 • **treasury**: *object*
 
-*Defined in [api/src/augment/query.ts:882](https://github.com/polkadot-js/api/blob/b0dc7cf451/packages/api/src/augment/query.ts#L882)*
+*Defined in [api/src/augment/query.ts:882](https://github.com/polkadot-js/api/blob/393f46ba4a/packages/api/src/augment/query.ts#L882)*
 
 #### Type declaration:
 
@@ -678,7 +678,7 @@ ___
 
 • **utility**: *object*
 
-*Defined in [api/src/augment/query.ts:908](https://github.com/polkadot-js/api/blob/b0dc7cf451/packages/api/src/augment/query.ts#L908)*
+*Defined in [api/src/augment/query.ts:908](https://github.com/polkadot-js/api/blob/393f46ba4a/packages/api/src/augment/query.ts#L908)*
 
 #### Type declaration:
 
@@ -692,7 +692,7 @@ ___
 
 • **vesting**: *object*
 
-*Defined in [api/src/augment/query.ts:915](https://github.com/polkadot-js/api/blob/b0dc7cf451/packages/api/src/augment/query.ts#L915)*
+*Defined in [api/src/augment/query.ts:915](https://github.com/polkadot-js/api/blob/393f46ba4a/packages/api/src/augment/query.ts#L915)*
 
 #### Type declaration:
 

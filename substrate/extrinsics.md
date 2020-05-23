@@ -680,17 +680,13 @@ ___
 
   \# \<weight>
 
-   
-
-  - Complexity: `O(E)` with E size of `encoded_proposal` (protected by a required deposit).
-
-  - Db reads: `Preimages`
-
-  - Db writes: `Preimages`
-
-  - Base Weight: 28.04 + .003 * b µs
+   see `weight_for::note_preimage` 
 
   \# \</weight> 
+ 
+### noteImminentPreimageOperational(encoded_proposal: `Vec<u8>`)
+- **interface**: `api.tx.democracy.noteImminentPreimageOperational`
+- **summary**:   Same as `note_imminent_preimage` but origin is `OperationalPreimageOrigin`. 
  
 ### notePreimage(encoded_proposal: `Vec<u8>`)
 - **interface**: `api.tx.democracy.notePreimage`
@@ -704,17 +700,13 @@ ___
 
   \# \<weight>
 
-   
-
-  - Complexity: `O(E)` with E size of `encoded_proposal` (protected by a required deposit).
-
-  - Db reads: `Preimages`
-
-  - Db writes: `Preimages`
-
-  - Base Weight: 37.93 + .004 * b µs
+   see `weight_for::note_preimage` 
 
   \# \</weight> 
+ 
+### notePreimageOperational(encoded_proposal: `Vec<u8>`)
+- **interface**: `api.tx.democracy.notePreimageOperational`
+- **summary**:   Same as `note_preimage` but origin is `OperationalPreimageOrigin`. 
  
 ### openProxy(target: `T::AccountId`)
 - **interface**: `api.tx.democracy.openProxy`

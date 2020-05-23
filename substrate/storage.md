@@ -135,6 +135,7 @@ ___
  
 ### underConstruction(`u32`): `Vec<Randomness>`
 - **interface**: `api.query.babe.underConstruction`
+- **summary**:   TWOX-NOTE: `SegmentIndex` is an increasing integer, so this is okay. 
 
 ___
 
@@ -179,6 +180,8 @@ ___
 ### contractInfoOf(`AccountId`): `Option<ContractInfo>`
 - **interface**: `api.query.contracts.contractInfoOf`
 - **summary**:   The code associated with a given account. 
+
+  TWOX-NOTE: SAFE since `AccountId` is a secure hash. 
  
 ### currentSchedule(): `Schedule`
 - **interface**: `api.query.contracts.currentSchedule`
@@ -233,6 +236,8 @@ ___
 ### depositOf(`PropIndex`): `Option<(Vec<AccountId>,BalanceOf)>`
 - **interface**: `api.query.democracy.depositOf`
 - **summary**:   Those who have locked a deposit. 
+
+  TWOX-NOTE: Safe, as increasing integer keys are safe. 
  
 ### lastTabledWasExternal(): `bool`
 - **interface**: `api.query.democracy.lastTabledWasExternal`
@@ -241,6 +246,8 @@ ___
 ### locks(`AccountId`): `Option<BlockNumber>`
 - **interface**: `api.query.democracy.locks`
 - **summary**:   Accounts for which there are locks in action which may be removed at some point in the future. The value is the block number at which the lock expires and may be removed. 
+
+  TWOX-NOTE: OK ― `AccountId` is a secure hash. 
  
 ### lowestUnbaked(): `ReferendumIndex`
 - **interface**: `api.query.democracy.lowestUnbaked`
@@ -261,6 +268,8 @@ ___
 ### proxy(`AccountId`): `Option<ProxyState>`
 - **interface**: `api.query.democracy.proxy`
 - **summary**:   Who is able to vote for whom. Value is the fund-holding account, key is the vote-transaction-sending account. 
+
+  TWOX-NOTE: OK ― `AccountId` is a secure hash. 
  
 ### publicPropCount(): `PropIndex`
 - **interface**: `api.query.democracy.publicPropCount`
@@ -277,6 +286,8 @@ ___
 ### referendumInfoOf(`ReferendumIndex`): `Option<ReferendumInfo>`
 - **interface**: `api.query.democracy.referendumInfoOf`
 - **summary**:   Information concerning any given referendum. 
+
+  TWOX-NOTE: SAFE as indexes are not under an attacker’s control. 
  
 ### storageVersion(): `Option<ReleasesDemocracy>`
 - **interface**: `api.query.democracy.storageVersion`
@@ -287,6 +298,8 @@ ___
 ### votingOf(`AccountId`): `Voting`
 - **interface**: `api.query.democracy.votingOf`
 - **summary**:   All votes for a particular voter. We store the balance for the number of votes that we have recorded. The second item is the total amount of delegations, that will be added. 
+
+  TWOX-NOTE: SAFE as `AccountId`s are crypto hashes anyway. 
 
 ___
 
@@ -313,6 +326,8 @@ ___
 - **interface**: `api.query.elections.voting`
 - **summary**:   Votes and locked stake of a particular voter. 
 
+  TWOX-NOTE: SAFE as `AccountId` is a crypto hash 
+
 ___
 
 
@@ -333,6 +348,8 @@ ___
 ### setIdSession(`SetId`): `Option<SessionIndex>`
 - **interface**: `api.query.grandpa.setIdSession`
 - **summary**:   A mapping from grandpa set ID to the index of the *most recent* session for which its members were responsible. 
+
+  TWOX-NOTE: `SetId` is not under user control. 
  
 ### stalled(): `Option<(BlockNumber,BlockNumber)>`
 - **interface**: `api.query.grandpa.stalled`
@@ -350,6 +367,8 @@ ___
 ### identityOf(`AccountId`): `Option<Registration>`
 - **interface**: `api.query.identity.identityOf`
 - **summary**:   Information that is pertinent to identify the entity behind an account. 
+
+  TWOX-NOTE: OK ― `AccountId` is a secure hash. 
  
 ### registrars(): `Vec<Option<RegistrarInfo>>`
 - **interface**: `api.query.identity.registrars`
@@ -362,6 +381,8 @@ ___
 - **summary**:   Alternative "sub" identities of this account. 
 
   The first item is the deposit, the second is a vector of the accounts. 
+
+  TWOX-NOTE: OK ― `AccountId` is a secure hash. 
  
 ### superOf(`AccountId`): `Option<(AccountId,Data)>`
 - **interface**: `api.query.identity.superOf`
@@ -772,13 +793,13 @@ ___
 - **interface**: `api.query.system.allExtrinsicsLen`
 - **summary**:   Total length (in bytes) for all extrinsics put together, for the current block. 
  
-### allExtrinsicsWeight(): `ExtrinsicsWeight`
-- **interface**: `api.query.system.allExtrinsicsWeight`
-- **summary**:   Total weight for all extrinsics for the current block. 
- 
 ### blockHash(`BlockNumber`): `Hash`
 - **interface**: `api.query.system.blockHash`
 - **summary**:   Map of block numbers to block hashes. 
+ 
+### blockWeight(): `ExtrinsicsWeight`
+- **interface**: `api.query.system.blockWeight`
+- **summary**:   The current weight for the block. 
  
 ### digest(): `DigestOf`
 - **interface**: `api.query.system.digest`
