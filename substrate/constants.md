@@ -42,7 +42,7 @@ ___
 - **interface**: `api.consts.babe.epochDuration`
 - **summary**:   The number of **slots** that an epoch takes. We couple sessions to epochs, i.e. we start a new session once the new epoch begins. 
  
-### expectedBlockTime: `T::Moment`
+### expectedBlockTime: `Moment`
 - **interface**: `api.consts.babe.expectedBlockTime`
 - **summary**:   The expected average block time at which BABE should be creating blocks. Since BABE is probabilistic it is not trivial to figure out what the expected average block time should be based on the slot duration and the security parameter `c` (where `1 - c` represents the probability of a slot being empty). 
 
@@ -51,7 +51,7 @@ ___
 
 ## balances
  
-### existentialDeposit: `T::Balance`
+### existentialDeposit: `Balance`
 - **interface**: `api.consts.balances.existentialDeposit`
 - **summary**:   The minimum amount required to keep an account open. 
 
@@ -68,17 +68,17 @@ ___
 - **interface**: `api.consts.contracts.maxValueSize`
 - **summary**:   The maximum size of a storage value in bytes. A reasonable default is 16 KiB. 
  
-### rentByteFee: `BalanceOf<T>`
+### rentByteFee: `BalanceOf`
 - **interface**: `api.consts.contracts.rentByteFee`
 - **summary**:   Price of a byte of storage per one block interval. Should be greater than 0. 
  
-### rentDepositOffset: `BalanceOf<T>`
+### rentDepositOffset: `BalanceOf`
 - **interface**: `api.consts.contracts.rentDepositOffset`
 - **summary**:   The amount of funds a contract should deposit in order to offset the cost of one byte. 
 
   Let's suppose the deposit is 1,000 BU (balance units)/byte and the rent is 1 BU/byte/day, then a contract with 1,000,000 BU that uses 1,000 bytes of storage would pay no rent. But if the balance reduced to 500,000 BU and the storage stayed the same at 1,000, then it would pay 500 BU/day. 
  
-### signedClaimHandicap: `T::BlockNumber`
+### signedClaimHandicap: `BlockNumber`
 - **interface**: `api.consts.contracts.signedClaimHandicap`
 - **summary**:   Number of block delay an extrinsic claim surcharge has. 
 
@@ -88,11 +88,11 @@ ___
 - **interface**: `api.consts.contracts.storageSizeOffset`
 - **summary**:   Size of a contract at the time of instantiation. This is a simple way to ensure that empty contracts eventually gets deleted. 
  
-### surchargeReward: `BalanceOf<T>`
+### surchargeReward: `BalanceOf`
 - **interface**: `api.consts.contracts.surchargeReward`
 - **summary**:   Reward that is received by the party whose touch has led to removal of a contract. 
  
-### tombstoneDeposit: `BalanceOf<T>`
+### tombstoneDeposit: `BalanceOf`
 - **interface**: `api.consts.contracts.tombstoneDeposit`
 - **summary**:   The minimum amount required to generate a tombstone. 
 
@@ -101,21 +101,21 @@ ___
 
 ## democracy
  
-### cooloffPeriod: `T::BlockNumber`
+### cooloffPeriod: `BlockNumber`
 - **interface**: `api.consts.democracy.cooloffPeriod`
 - **summary**:   Period in blocks where an external proposal may not be re-submitted after being vetoed. 
  
-### enactmentPeriod: `T::BlockNumber`
+### enactmentPeriod: `BlockNumber`
 - **interface**: `api.consts.democracy.enactmentPeriod`
 - **summary**:   The minimum period of locking and the period between a proposal being approved and enacted. 
 
   It should generally be a little more than the unstake period to ensure that voting stakers have an opportunity to remove themselves from the system in the case where they are on the losing side of a vote. 
  
-### fastTrackVotingPeriod: `T::BlockNumber`
+### fastTrackVotingPeriod: `BlockNumber`
 - **interface**: `api.consts.democracy.fastTrackVotingPeriod`
 - **summary**:   Minimum voting period allowed for an emergency referendum. 
  
-### launchPeriod: `T::BlockNumber`
+### launchPeriod: `BlockNumber`
 - **interface**: `api.consts.democracy.launchPeriod`
 - **summary**:   How often (in blocks) new public referenda are launched. 
  
@@ -123,15 +123,15 @@ ___
 - **interface**: `api.consts.democracy.maxVotes`
 - **summary**:   The maximum number of votes for an account. 
  
-### minimumDeposit: `BalanceOf<T>`
+### minimumDeposit: `BalanceOf`
 - **interface**: `api.consts.democracy.minimumDeposit`
 - **summary**:   The minimum amount to be used as a deposit for a public referendum proposal. 
  
-### preimageByteDeposit: `BalanceOf<T>`
+### preimageByteDeposit: `BalanceOf`
 - **interface**: `api.consts.democracy.preimageByteDeposit`
 - **summary**:   The amount of balance that must be deposited per byte of preimage stored. 
  
-### votingPeriod: `T::BlockNumber`
+### votingPeriod: `BlockNumber`
 - **interface**: `api.consts.democracy.votingPeriod`
 - **summary**:   How often (in blocks) to check for new votes. 
 
@@ -140,7 +140,7 @@ ___
 
 ## elections
  
-### candidacyBond: `BalanceOf<T>`
+### candidacyBond: `BalanceOf`
 - **interface**: `api.consts.elections.candidacyBond`
  
 ### desiredMembers: `u32`
@@ -152,10 +152,10 @@ ___
 ### moduleId: `LockIdentifier`
 - **interface**: `api.consts.elections.moduleId`
  
-### termDuration: `T::BlockNumber`
+### termDuration: `BlockNumber`
 - **interface**: `api.consts.elections.termDuration`
  
-### votingBond: `BalanceOf<T>`
+### votingBond: `BalanceOf`
 - **interface**: `api.consts.elections.votingBond`
 
 ___
@@ -163,11 +163,11 @@ ___
 
 ## finalityTracker
  
-### reportLatency: `T::BlockNumber`
+### reportLatency: `BlockNumber`
 - **interface**: `api.consts.finalityTracker.reportLatency`
 - **summary**:   The delay after which point things become suspicious. Default is 1000. 
  
-### windowSize: `T::BlockNumber`
+### windowSize: `BlockNumber`
 - **interface**: `api.consts.finalityTracker.windowSize`
 - **summary**:   The number of recent samples to keep from this chain. Default is 101. 
 
@@ -176,11 +176,11 @@ ___
 
 ## identity
  
-### basicDeposit: `BalanceOf<T>`
+### basicDeposit: `BalanceOf`
 - **interface**: `api.consts.identity.basicDeposit`
 - **summary**:   The amount held on deposit for a registered identity. 
  
-### fieldDeposit: `BalanceOf<T>`
+### fieldDeposit: `BalanceOf`
 - **interface**: `api.consts.identity.fieldDeposit`
 - **summary**:   The amount held on deposit per additional field for a registered identity. 
  
@@ -196,7 +196,7 @@ ___
 - **interface**: `api.consts.identity.maxSubAccounts`
 - **summary**:   The maximum number of sub-accounts allowed per identified account. 
  
-### subAccountDeposit: `BalanceOf<T>`
+### subAccountDeposit: `BalanceOf`
 - **interface**: `api.consts.identity.subAccountDeposit`
 - **summary**:   The amount held on deposit for a registered subaccount. This should account for the fact that one storage item's value will increase by the size of an account ID, and there will be another trie item whose value is the size of an account ID plus 32 bytes. 
 
@@ -205,11 +205,11 @@ ___
 
 ## society
  
-### candidateDeposit: `BalanceOf<T, I>`
+### candidateDeposit: `BalanceOf`
 - **interface**: `api.consts.society.candidateDeposit`
 - **summary**:   The minimum amount of a deposit required for a bid to be made. 
  
-### challengePeriod: `T::BlockNumber`
+### challengePeriod: `BlockNumber`
 - **interface**: `api.consts.society.challengePeriod`
 - **summary**:   The number of blocks between membership challenges. 
  
@@ -221,15 +221,15 @@ ___
 - **interface**: `api.consts.society.moduleId`
 - **summary**:   The societies's module id 
  
-### periodSpend: `BalanceOf<T, I>`
+### periodSpend: `BalanceOf`
 - **interface**: `api.consts.society.periodSpend`
 - **summary**:   The amount of incentive paid within each period. Doesn't include VoterTip. 
  
-### rotationPeriod: `T::BlockNumber`
+### rotationPeriod: `BlockNumber`
 - **interface**: `api.consts.society.rotationPeriod`
 - **summary**:   The number of blocks between candidate/membership rotation periods. 
  
-### wrongSideDeduction: `BalanceOf<T, I>`
+### wrongSideDeduction: `BalanceOf`
 - **interface**: `api.consts.society.wrongSideDeduction`
 - **summary**:   The amount of the unpaid reward that gets deducted in the case that either a skeptic doesn't vote or someone votes in the wrong way. 
 
@@ -255,7 +255,7 @@ ___
 - **interface**: `api.consts.system.blockExecutionWeight`
 - **summary**:   The base weight of executing a block, independent of the transactions in the block. 
  
-### blockHashCount: `T::BlockNumber`
+### blockHashCount: `BlockNumber`
 - **interface**: `api.consts.system.blockHashCount`
 - **summary**:   The maximum number of blocks to allow in mortal eras. 
  
@@ -280,7 +280,7 @@ ___
 
 ## timestamp
  
-### minimumPeriod: `T::Moment`
+### minimumPeriod: `Moment`
 - **interface**: `api.consts.timestamp.minimumPeriod`
 - **summary**:   The minimum period between blocks. Beware that this is different to the *expected* period that the block production apparatus provides. Your chosen consensus system will generally work with this to determine a sensible block time. e.g. For Aura, it will be double this period on default settings. 
 
@@ -289,11 +289,11 @@ ___
 
 ## transactionPayment
  
-### transactionByteFee: `BalanceOf<T>`
+### transactionByteFee: `BalanceOf`
 - **interface**: `api.consts.transactionPayment.transactionByteFee`
 - **summary**:   The fee to be paid for making a transaction; the per-byte portion. 
  
-### weightToFee: `Vec<WeightToFeeCoefficient<BalanceOf<T>>>`
+### weightToFee: `Vec<WeightToFeeCoefficient>`
 - **interface**: `api.consts.transactionPayment.weightToFee`
 - **summary**:   The polynomial that is applied in order to derive fee from weight. 
 
@@ -314,15 +314,15 @@ ___
 - **interface**: `api.consts.treasury.proposalBond`
 - **summary**:   Fraction of a proposal's value that should be bonded in order to place the proposal. An accepted proposal gets these back. A rejected proposal does not. 
  
-### proposalBondMinimum: `BalanceOf<T>`
+### proposalBondMinimum: `BalanceOf`
 - **interface**: `api.consts.treasury.proposalBondMinimum`
 - **summary**:   Minimum amount of funds that should be placed in a deposit for making a proposal. 
  
-### spendPeriod: `T::BlockNumber`
+### spendPeriod: `BlockNumber`
 - **interface**: `api.consts.treasury.spendPeriod`
 - **summary**:   Period between successive spends. 
  
-### tipCountdown: `T::BlockNumber`
+### tipCountdown: `BlockNumber`
 - **interface**: `api.consts.treasury.tipCountdown`
 - **summary**:   The period for which a tip remains open after is has achieved threshold tippers. 
  
@@ -330,11 +330,11 @@ ___
 - **interface**: `api.consts.treasury.tipFindersFee`
 - **summary**:   The amount of the final tip which goes to the original reporter of the tip. 
  
-### tipReportDepositBase: `BalanceOf<T>`
+### tipReportDepositBase: `BalanceOf`
 - **interface**: `api.consts.treasury.tipReportDepositBase`
 - **summary**:   The amount held on deposit for placing a tip report. 
  
-### tipReportDepositPerByte: `BalanceOf<T>`
+### tipReportDepositPerByte: `BalanceOf`
 - **interface**: `api.consts.treasury.tipReportDepositPerByte`
 - **summary**:   The amount held on deposit per byte within the tip report reason. 
 
@@ -343,6 +343,6 @@ ___
 
 ## vesting
  
-### minVestedTransfer: `BalanceOf<T>`
+### minVestedTransfer: `BalanceOf`
 - **interface**: `api.consts.vesting.minVestedTransfer`
 - **summary**:   The minimum amount to be transferred to create a new vesting schedule. 

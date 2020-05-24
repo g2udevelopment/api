@@ -59,18 +59,18 @@ Defined in node_modules/@types/bn.js/index.d.ts:12
 
 ###  constructor
 
-\+ **new USize**(`registry`: [Registry](../interfaces/_types_registry_.registry.md), `value?`: any): *[USize](_primitive_usize_.usize.md)*
+\+ **new USize**(`registry`: [Registry](../interfaces/_types_registry_.registry.md), `value?`: unknown): *[USize](_primitive_usize_.usize.md)*
 
 *Overrides [UInt](_codec_uint_.uint.md).[constructor](_codec_uint_.uint.md#constructor)*
 
-*Defined in [packages/types/src/primitive/USize.ts:16](https://github.com/polkadot-js/api/blob/dde7c8085a/packages/types/src/primitive/USize.ts#L16)*
+*Defined in [packages/types/src/primitive/USize.ts:16](https://github.com/polkadot-js/api/blob/47fc4a2b3c/packages/types/src/primitive/USize.ts#L16)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
 `registry` | [Registry](../interfaces/_types_registry_.registry.md) |
-`value?` | any |
+`value?` | unknown |
 
 **Returns:** *[USize](_primitive_usize_.usize.md)*
 
@@ -82,7 +82,7 @@ Name | Type |
 
 *Inherited from [UInt](_codec_uint_.uint.md).[with](_codec_uint_.uint.md#static-with)*
 
-*Defined in [packages/types/src/codec/UInt.ts:24](https://github.com/polkadot-js/api/blob/dde7c8085a/packages/types/src/codec/UInt.ts#L24)*
+*Defined in [packages/types/src/codec/UInt.ts:24](https://github.com/polkadot-js/api/blob/47fc4a2b3c/packages/types/src/codec/UInt.ts#L24)*
 
 **Parameters:**
 

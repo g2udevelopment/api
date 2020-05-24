@@ -12,15 +12,15 @@
 
 ###  compareArray
 
-▸ **compareArray**(`a`: any[], `b?`: any): *boolean*
+▸ **compareArray**(`a`: unknown[], `b?`: unknown): *boolean*
 
-*Defined in [packages/types/src/codec/utils/compareArray.ts:9](https://github.com/polkadot-js/api/blob/dde7c8085a/packages/types/src/codec/utils/compareArray.ts#L9)*
+*Defined in [packages/types/src/codec/utils/compareArray.ts:11](https://github.com/polkadot-js/api/blob/47fc4a2b3c/packages/types/src/codec/utils/compareArray.ts#L11)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`a` | any[] |
-`b?` | any |
+`a` | unknown[] |
+`b?` | unknown |
 
 **Returns:** *boolean*

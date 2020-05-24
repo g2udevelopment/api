@@ -39,6 +39,7 @@
 * ["codec/utils/encodeTypes"](modules/_codec_utils_encodetypes_.md)
 * ["codec/utils/mapToTypeMap"](modules/_codec_utils_maptotypemap_.md)
 * ["codec/utils/typeToConstructor"](modules/_codec_utils_typetoconstructor_.md)
+* ["codec/utils/util"](modules/_codec_utils_util_.md)
 * ["create/createClass"](modules/_create_createclass_.md)
 * ["create/createType"](modules/_create_createtype_.md)
 * ["create/getTypeDef"](modules/_create_gettypedef_.md)

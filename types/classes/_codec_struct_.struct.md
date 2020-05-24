@@ -103,9 +103,9 @@ it needs to decoded in the specific defined order.
 
 ###  constructor
 
-\+ **new Struct**(`registry`: [Registry](../interfaces/_types_registry_.registry.md), `Types`: S, `value`: V | [Map](_codec_struct_.struct.md#static-map)‹any, any› | any[] | string, `jsonMap`: [Map](_codec_struct_.struct.md#static-map)‹keyof S, string›): *[Struct](_codec_struct_.struct.md)*
+\+ **new Struct**(`registry`: [Registry](../interfaces/_types_registry_.registry.md), `Types`: S, `value`: V | [Map](_codec_struct_.struct.md#static-map)‹unknown, unknown› | unknown[] | string, `jsonMap`: [Map](_codec_struct_.struct.md#static-map)‹keyof S, string›): *[Struct](_codec_struct_.struct.md)*
 
-*Defined in [packages/types/src/codec/Struct.ts:110](https://github.com/polkadot-js/api/blob/dde7c8085a/packages/types/src/codec/Struct.ts#L110)*
+*Defined in [packages/types/src/codec/Struct.ts:116](https://github.com/polkadot-js/api/blob/47fc4a2b3c/packages/types/src/codec/Struct.ts#L116)*
 
 **Parameters:**
 
@@ -113,7 +113,7 @@ Name | Type | Default |
 ------ | ------ | ------ |
 `registry` | [Registry](../interfaces/_types_registry_.registry.md) | - |
 `Types` | S | - |
-`value` | V &#124; [Map](_codec_struct_.struct.md#static-map)‹any, any› &#124; any[] &#124; string | {} as V |
+`value` | V &#124; [Map](_codec_struct_.struct.md#static-map)‹unknown, unknown› &#124; unknown[] &#124; string | {} as V |
 `jsonMap` | [Map](_codec_struct_.struct.md#static-map)‹keyof S, string› | new Map() |
 
 **Returns:** *[Struct](_codec_struct_.struct.md)*
@@ -126,7 +126,7 @@ Name | Type | Default |
 
 *Implementation of [Codec](../interfaces/_types_codec_.codec.md).[registry](../interfaces/_types_codec_.codec.md#readonly-registry)*
 
-*Defined in [packages/types/src/codec/Struct.ts:106](https://github.com/polkadot-js/api/blob/dde7c8085a/packages/types/src/codec/Struct.ts#L106)*
+*Defined in [packages/types/src/codec/Struct.ts:112](https://github.com/polkadot-js/api/blob/47fc4a2b3c/packages/types/src/codec/Struct.ts#L112)*
 
 ___
 
@@ -142,7 +142,7 @@ Defined in node_modules/typescript/lib/lib.es2015.collection.d.ts:36
 
 • **get Type**(): *E*
 
-*Defined in [packages/types/src/codec/Struct.ts:167](https://github.com/polkadot-js/api/blob/dde7c8085a/packages/types/src/codec/Struct.ts#L167)*
+*Defined in [packages/types/src/codec/Struct.ts:175](https://github.com/polkadot-js/api/blob/47fc4a2b3c/packages/types/src/codec/Struct.ts#L175)*
 
 **`description`** Returns the Type description to sthe structure
 
@@ -154,7 +154,7 @@ ___
 
 • **get defKeys**(): *string[]*
 
-*Defined in [packages/types/src/codec/Struct.ts:145](https://github.com/polkadot-js/api/blob/dde7c8085a/packages/types/src/codec/Struct.ts#L145)*
+*Defined in [packages/types/src/codec/Struct.ts:153](https://github.com/polkadot-js/api/blob/47fc4a2b3c/packages/types/src/codec/Struct.ts#L153)*
 
 **`description`** The available keys for this enum
 
@@ -166,7 +166,7 @@ ___
 
 • **get encodedLength**(): *number*
 
-*Defined in [packages/types/src/codec/Struct.ts:180](https://github.com/polkadot-js/api/blob/dde7c8085a/packages/types/src/codec/Struct.ts#L180)*
+*Defined in [packages/types/src/codec/Struct.ts:189](https://github.com/polkadot-js/api/blob/47fc4a2b3c/packages/types/src/codec/Struct.ts#L189)*
 
 **`description`** The length of the value when encoded as a Uint8Array
 
@@ -178,7 +178,7 @@ ___
 
 • **get hash**(): *H256*
 
-*Defined in [packages/types/src/codec/Struct.ts:191](https://github.com/polkadot-js/api/blob/dde7c8085a/packages/types/src/codec/Struct.ts#L191)*
+*Defined in [packages/types/src/codec/Struct.ts:200](https://github.com/polkadot-js/api/blob/47fc4a2b3c/packages/types/src/codec/Struct.ts#L200)*
 
 **`description`** returns a hash of the contents
 
@@ -190,7 +190,7 @@ ___
 
 • **get isEmpty**(): *boolean*
 
-*Defined in [packages/types/src/codec/Struct.ts:152](https://github.com/polkadot-js/api/blob/dde7c8085a/packages/types/src/codec/Struct.ts#L152)*
+*Defined in [packages/types/src/codec/Struct.ts:160](https://github.com/polkadot-js/api/blob/47fc4a2b3c/packages/types/src/codec/Struct.ts#L160)*
 
 **`description`** Checks if the value is an empty value
 
@@ -200,11 +200,11 @@ ___
 
 ###  eq
 
-▸ **eq**(`other?`: any): *boolean*
+▸ **eq**(`other?`: unknown): *boolean*
 
 *Implementation of [Codec](../interfaces/_types_codec_.codec.md)*
 
-*Defined in [packages/types/src/codec/Struct.ts:198](https://github.com/polkadot-js/api/blob/dde7c8085a/packages/types/src/codec/Struct.ts#L198)*
+*Defined in [packages/types/src/codec/Struct.ts:207](https://github.com/polkadot-js/api/blob/47fc4a2b3c/packages/types/src/codec/Struct.ts#L207)*
 
 **`description`** Compares the value of the input to see if there is a match
 
@@ -212,7 +212,7 @@ ___
 
 Name | Type |
 ------ | ------ |
-`other?` | any |
+`other?` | unknown |
 
 **Returns:** *boolean*
 
@@ -224,7 +224,7 @@ ___
 
 *Overrides [CodecMap](_codec_map_.codecmap.md).[get](_codec_map_.codecmap.md#get)*
 
-*Defined in [packages/types/src/codec/Struct.ts:206](https://github.com/polkadot-js/api/blob/dde7c8085a/packages/types/src/codec/Struct.ts#L206)*
+*Defined in [packages/types/src/codec/Struct.ts:215](https://github.com/polkadot-js/api/blob/47fc4a2b3c/packages/types/src/codec/Struct.ts#L215)*
 
 **`description`** Returns a specific names entry in the structure
 
@@ -242,7 +242,7 @@ ___
 
 ▸ **getAtIndex**(`index`: number): *[Codec](../interfaces/_types_codec_.codec.md)*
 
-*Defined in [packages/types/src/codec/Struct.ts:213](https://github.com/polkadot-js/api/blob/dde7c8085a/packages/types/src/codec/Struct.ts#L213)*
+*Defined in [packages/types/src/codec/Struct.ts:222](https://github.com/polkadot-js/api/blob/47fc4a2b3c/packages/types/src/codec/Struct.ts#L222)*
 
 **`description`** Returns the values of a member at a specific index (Rather use get(name) for performance)
 
@@ -260,7 +260,7 @@ ___
 
 ▸ **toArray**(): *[Codec](../interfaces/_types_codec_.codec.md)[]*
 
-*Defined in [packages/types/src/codec/Struct.ts:220](https://github.com/polkadot-js/api/blob/dde7c8085a/packages/types/src/codec/Struct.ts#L220)*
+*Defined in [packages/types/src/codec/Struct.ts:229](https://github.com/polkadot-js/api/blob/47fc4a2b3c/packages/types/src/codec/Struct.ts#L229)*
 
 **`description`** Converts the Object to an standard JavaScript Array
 
@@ -272,7 +272,7 @@ ___
 
 ▸ **toHex**(): *string*
 
-*Defined in [packages/types/src/codec/Struct.ts:227](https://github.com/polkadot-js/api/blob/dde7c8085a/packages/types/src/codec/Struct.ts#L227)*
+*Defined in [packages/types/src/codec/Struct.ts:236](https://github.com/polkadot-js/api/blob/47fc4a2b3c/packages/types/src/codec/Struct.ts#L236)*
 
 **`description`** Returns a hex string representation of the value
 
@@ -286,7 +286,7 @@ ___
 
 *Implementation of [Codec](../interfaces/_types_codec_.codec.md)*
 
-*Defined in [packages/types/src/codec/Struct.ts:234](https://github.com/polkadot-js/api/blob/dde7c8085a/packages/types/src/codec/Struct.ts#L234)*
+*Defined in [packages/types/src/codec/Struct.ts:243](https://github.com/polkadot-js/api/blob/47fc4a2b3c/packages/types/src/codec/Struct.ts#L243)*
 
 **`description`** Converts the Object to to a human-friendly JSON, with additional fields, expansion and formatting of information
 
@@ -306,7 +306,7 @@ ___
 
 *Implementation of [Codec](../interfaces/_types_codec_.codec.md)*
 
-*Defined in [packages/types/src/codec/Struct.ts:247](https://github.com/polkadot-js/api/blob/dde7c8085a/packages/types/src/codec/Struct.ts#L247)*
+*Defined in [packages/types/src/codec/Struct.ts:256](https://github.com/polkadot-js/api/blob/47fc4a2b3c/packages/types/src/codec/Struct.ts#L256)*
 
 **`description`** Converts the Object to JSON, typically used for RPC transfers
 
@@ -320,7 +320,7 @@ ___
 
 *Implementation of [Codec](../interfaces/_types_codec_.codec.md)*
 
-*Defined in [packages/types/src/codec/Struct.ts:271](https://github.com/polkadot-js/api/blob/dde7c8085a/packages/types/src/codec/Struct.ts#L271)*
+*Defined in [packages/types/src/codec/Struct.ts:280](https://github.com/polkadot-js/api/blob/47fc4a2b3c/packages/types/src/codec/Struct.ts#L280)*
 
 **`description`** Returns the base runtime type name for this instance
 
@@ -334,7 +334,7 @@ ___
 
 *Implementation of [Codec](../interfaces/_types_codec_.codec.md)*
 
-*Defined in [packages/types/src/codec/Struct.ts:280](https://github.com/polkadot-js/api/blob/dde7c8085a/packages/types/src/codec/Struct.ts#L280)*
+*Defined in [packages/types/src/codec/Struct.ts:289](https://github.com/polkadot-js/api/blob/47fc4a2b3c/packages/types/src/codec/Struct.ts#L289)*
 
 **`description`** Returns the string representation of the value
 
@@ -348,7 +348,7 @@ ___
 
 *Implementation of [Codec](../interfaces/_types_codec_.codec.md)*
 
-*Defined in [packages/types/src/codec/Struct.ts:288](https://github.com/polkadot-js/api/blob/dde7c8085a/packages/types/src/codec/Struct.ts#L288)*
+*Defined in [packages/types/src/codec/Struct.ts:297](https://github.com/polkadot-js/api/blob/47fc4a2b3c/packages/types/src/codec/Struct.ts#L297)*
 
 **`description`** Encodes the value as a Uint8Array as per the SCALE specifications
 
@@ -366,7 +366,7 @@ ___
 
 ▸ **typesToMap**(`registry`: [Registry](../interfaces/_types_registry_.registry.md), `Types`: Record‹string, [Constructor](../interfaces/_types_codec_.constructor.md)›): *Record‹string, string›*
 
-*Defined in [packages/types/src/codec/Struct.ts:260](https://github.com/polkadot-js/api/blob/dde7c8085a/packages/types/src/codec/Struct.ts#L260)*
+*Defined in [packages/types/src/codec/Struct.ts:269](https://github.com/polkadot-js/api/blob/47fc4a2b3c/packages/types/src/codec/Struct.ts#L269)*
 
 **Parameters:**
 
@@ -383,7 +383,7 @@ ___
 
 ▸ **with**<**S**>(`Types`: S, `jsonMap?`: [Map](_codec_struct_.struct.md#static-map)‹keyof S, string›): *[Constructor](../interfaces/_types_codec_.constructor.md)‹[Struct](_codec_struct_.struct.md)‹S››*
 
-*Defined in [packages/types/src/codec/Struct.ts:122](https://github.com/polkadot-js/api/blob/dde7c8085a/packages/types/src/codec/Struct.ts#L122)*
+*Defined in [packages/types/src/codec/Struct.ts:129](https://github.com/polkadot-js/api/blob/47fc4a2b3c/packages/types/src/codec/Struct.ts#L129)*
 
 **Type parameters:**
 

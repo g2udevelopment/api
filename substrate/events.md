@@ -77,7 +77,7 @@ ___
 ### CodeStored(`Hash`)
 - **summary**:   Code with the specified hash has been stored. 
  
-### ContractExecution(`AccountId`, `Vec<u8>`)
+### ContractExecution(`AccountId`, `Bytes`)
 - **summary**:   An event deposited upon execution of a contract from the account. 
  
 ### Dispatched(`AccountId`, `bool`)
@@ -212,7 +212,7 @@ ___
 ### MemberRenounced(`AccountId`)
 - **summary**:   A member has renounced their candidacy. 
  
-### NewTerm(`Vec<(AccountId, Balance)>`)
+### NewTerm(`Vec<(AccountId,Balance)>`)
 - **summary**:   A new term with new members. This indicates that enough candidates existed to run the election, not that enough have has been elected. The inner value must be examined for this purpose. A `NewTerm([])` indicates that some candidates got their bond slashed and none were elected, whilst `EmptyTerm` means that no candidates existed to begin with. 
  
 ### VoterReported(`AccountId`, `AccountId`, `bool`)
@@ -321,7 +321,7 @@ ___
  
 ### Canceled(`BlockNumber`, `u32`)
  
-### Dispatched(`TaskAddress<BlockNumber>`, `Option<Vec<u8>>`, `DispatchResult`)
+### Dispatched(`TaskAddress`, `Option<Bytes>`, `DispatchResult`)
  
 ### Scheduled(`BlockNumber`, `u32`)
 
@@ -479,7 +479,7 @@ ___
 
 ## technicalMembership
  
-### Dummy(`sp_std::marker::PhantomData<(AccountId, Event)>`)
+### Dummy(`PhantomData`)
 - **summary**:   Phantom member, never used. 
  
 ### KeyChanged()
@@ -546,13 +546,13 @@ ___
 ### BatchInterrupted(`u32`, `DispatchError`)
 - **summary**:   Batch of dispatches did not complete fully. Index of first failing dispatch given, as well as the error. 
  
-### MultisigApproval(`AccountId`, `Timepoint<BlockNumber>`, `AccountId`, `CallHash`)
+### MultisigApproval(`AccountId`, `Timepoint`, `AccountId`, `CallHash`)
 - **summary**:   A multisig operation has been approved by someone. First param is the account that is approving, third is the multisig account, fourth is hash of the call. 
  
-### MultisigCancelled(`AccountId`, `Timepoint<BlockNumber>`, `AccountId`, `CallHash`)
+### MultisigCancelled(`AccountId`, `Timepoint`, `AccountId`, `CallHash`)
 - **summary**:   A multisig operation has been cancelled. First param is the account that is cancelling, third is the multisig account, fourth is hash of the call. 
  
-### MultisigExecuted(`AccountId`, `Timepoint<BlockNumber>`, `AccountId`, `CallHash`, `DispatchResult`)
+### MultisigExecuted(`AccountId`, `Timepoint`, `AccountId`, `CallHash`, `DispatchResult`)
 - **summary**:   A multisig operation has been executed. First param is the account that is approving, third is the multisig account, fourth is hash of the call to be executed. 
  
 ### NewMultisig(`AccountId`, `AccountId`, `CallHash`)

@@ -26,7 +26,7 @@
 
 Ƭ **DefinitionType**: *string | [DefinitionTypeEnum](_types_definitions_.md#definitiontypeenum) | [DefinitionTypeSet](_types_definitions_.md#definitiontypeset) | [DefinitionTypeStruct](_types_definitions_.md#definitiontypestruct)*
 
-*Defined in [packages/types/src/types/definitions.ts:14](https://github.com/polkadot-js/api/blob/dde7c8085a/packages/types/src/types/definitions.ts#L14)*
+*Defined in [packages/types/src/types/definitions.ts:13](https://github.com/polkadot-js/api/blob/47fc4a2b3c/packages/types/src/types/definitions.ts#L13)*
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 Ƭ **DefinitionTypeEnum**: *object | object*
 
-*Defined in [packages/types/src/types/definitions.ts:7](https://github.com/polkadot-js/api/blob/dde7c8085a/packages/types/src/types/definitions.ts#L7)*
+*Defined in [packages/types/src/types/definitions.ts:7](https://github.com/polkadot-js/api/blob/47fc4a2b3c/packages/types/src/types/definitions.ts#L7)*
 
 ___
 
@@ -42,7 +42,7 @@ ___
 
 Ƭ **DefinitionTypeSet**: *object*
 
-*Defined in [packages/types/src/types/definitions.ts:9](https://github.com/polkadot-js/api/blob/dde7c8085a/packages/types/src/types/definitions.ts#L9)*
+*Defined in [packages/types/src/types/definitions.ts:9](https://github.com/polkadot-js/api/blob/47fc4a2b3c/packages/types/src/types/definitions.ts#L9)*
 
 #### Type declaration:
 
@@ -52,9 +52,9 @@ ___
 
 ###  DefinitionTypeStruct
 
-Ƭ **DefinitionTypeStruct**: *Record‹string, [DefinitionTypeType](_types_definitions_.md#definitiontypetype)› | object & object*
+Ƭ **DefinitionTypeStruct**: *Record‹string, [DefinitionTypeType](_types_definitions_.md#definitiontypetype)› | object & Record‹string, unknown›*
 
-*Defined in [packages/types/src/types/definitions.ts:12](https://github.com/polkadot-js/api/blob/dde7c8085a/packages/types/src/types/definitions.ts#L12)*
+*Defined in [packages/types/src/types/definitions.ts:11](https://github.com/polkadot-js/api/blob/47fc4a2b3c/packages/types/src/types/definitions.ts#L11)*
 
 ___
 
@@ -62,4 +62,4 @@ ___
 
 Ƭ **DefinitionTypeType**: *string*
 
-*Defined in [packages/types/src/types/definitions.ts:5](https://github.com/polkadot-js/api/blob/dde7c8085a/packages/types/src/types/definitions.ts#L5)*
+*Defined in [packages/types/src/types/definitions.ts:5](https://github.com/polkadot-js/api/blob/47fc4a2b3c/packages/types/src/types/definitions.ts#L5)*

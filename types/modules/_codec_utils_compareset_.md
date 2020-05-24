@@ -12,15 +12,15 @@
 
 ###  compareSet
 
-▸ **compareSet**(`a`: [Set](../classes/_codec_btreeset_.btreeset.md#static-set)‹any›, `b?`: any): *boolean*
+▸ **compareSet**(`a`: [Set](../classes/_codec_btreeset_.btreeset.md#static-set)‹unknown›, `b?`: unknown): *boolean*
 
-*Defined in [packages/types/src/codec/utils/compareSet.ts:14](https://github.com/polkadot-js/api/blob/dde7c8085a/packages/types/src/codec/utils/compareSet.ts#L14)*
+*Defined in [packages/types/src/codec/utils/compareSet.ts:14](https://github.com/polkadot-js/api/blob/47fc4a2b3c/packages/types/src/codec/utils/compareSet.ts#L14)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`a` | [Set](../classes/_codec_btreeset_.btreeset.md#static-set)‹any› |
-`b?` | any |
+`a` | [Set](../classes/_codec_btreeset_.btreeset.md#static-set)‹unknown› |
+`b?` | unknown |
 
 **Returns:** *boolean*
