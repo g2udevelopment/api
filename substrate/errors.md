@@ -619,6 +619,9 @@ ___
 ### PhragmenBogusEdge
 - **summary**:   The submitted result has unknown edges that are not among the presented winners. 
  
+### PhragmenBogusElectionSize
+- **summary**:   The election size is invalid. 
+ 
 ### PhragmenBogusNomination
 - **summary**:   One of the submitted nominators has an edge to which they have not voted on chain. 
  

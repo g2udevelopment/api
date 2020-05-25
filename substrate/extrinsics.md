@@ -3007,7 +3007,7 @@ ___
 
   \# \</weight> 
  
-### submitElectionSolution(winners: `Vec<ValidatorIndex>`, compact_assignments: `CompactAssignments`, score: `PhragmenScore`, era: `EraIndex`)
+### submitElectionSolution(winners: `Vec<ValidatorIndex>`, compact: `CompactAssignments`, score: `PhragmenScore`, era: `EraIndex`, size: `ElectionSize`)
 - **interface**: `api.tx.staking.submitElectionSolution`
 - **summary**:   Submit a phragmen result to the chain. If the solution: 
 
@@ -3037,49 +3037,21 @@ ___
 
   \# \<weight>
 
-   E: number of edges. m: size of winner committee. n: number of nominators. d: edge degree (16 for now) v: number of on-chain validator candidates. 
-
-  NOTE: given a solution which is reduced, we can enable a new check the ensure `|E| < n + m`. We don't do this _yet_, but our offchain worker code executes it nonetheless. 
-
-  major steps (all done in `check_and_replace_solution`): 
-
-  - Storage: O(1) read `ElectionStatus`. 
-
-  - Storage: O(1) read `PhragmenScore`.
-
-  - Storage: O(1) read `ValidatorCount`.
-
-  - Storage: O(1) length read from `SnapshotValidators`.
-
-  - Storage: O(v) reads of `AccountId` to fetch `snapshot_validators`. 
-
-  - Memory: O(m) iterations to map winner index to validator id.
-
-  - Storage: O(n) reads `AccountId` to fetch `snapshot_nominators`.
-
-  - Memory: O(n + m) reads to map index to `AccountId` for un-compact.
-
-  - Storage: O(e) accountid reads from `Nomination` to read correct nominations. 
-
-  - Storage: O(e) calls into `slashable_balance_of_vote_weight` to convert ratio to staked.
-
-  - Memory: build_support_map. O(e). 
-
-  - Memory: evaluate_support: O(E).
-
-  - Storage: O(e) writes to `QueuedElected`. 
-
-  - Storage: O(1) write to `QueuedScore`
-
-  The weight of this call is 1/10th of the blocks total weight. 
+   See `crate::weight` module. 
 
   \# \</weight> 
  
-### submitElectionSolutionUnsigned(winners: `Vec<ValidatorIndex>`, compact_assignments: `CompactAssignments`, score: `PhragmenScore`, era: `EraIndex`)
+### submitElectionSolutionUnsigned(winners: `Vec<ValidatorIndex>`, compact: `CompactAssignments`, score: `PhragmenScore`, era: `EraIndex`, size: `ElectionSize`)
 - **interface**: `api.tx.staking.submitElectionSolutionUnsigned`
 - **summary**:   Unsigned version of `submit_election_solution`. 
 
   Note that this must pass the [`ValidateUnsigned`] check which only allows transactions from the local node to be included. In other words, only the block author can include a transaction in the block. 
+
+  \# \<weight>
+
+   See `crate::weight` module. 
+
+  \# \</weight> 
  
 ### unbond(value: `Compact<BalanceOf>`)
 - **interface**: `api.tx.staking.unbond`
