@@ -14,7 +14,7 @@
 
 ▸ **createSubmittable**<**ApiType**>(`apiType`: [ApiTypes](_types_base_.md#apitypes), `api`: ApiInterfaceRx, `decorateMethod`: ApiBase<ApiType>["_decorateMethod"]): *Creator‹ApiType›*
 
-*Defined in [api/src/submittable/createSubmittable.ts:17](https://github.com/polkadot-js/api/blob/4156eb44ab/packages/api/src/submittable/createSubmittable.ts#L17)*
+*Defined in [api/src/submittable/createSubmittable.ts:17](https://github.com/polkadot-js/api/blob/4aa66fd4c6/packages/api/src/submittable/createSubmittable.ts#L17)*
 
 **Type parameters:**
 
