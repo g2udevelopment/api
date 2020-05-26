@@ -22,7 +22,7 @@
 
 • **isSome**: *boolean*
 
-*Defined in [packages/types/src/types/registry.ts:65](https://github.com/polkadot-js/api/blob/4b1a9ab9e1/packages/types/src/types/registry.ts#L65)*
+*Defined in [packages/types/src/types/registry.ts:65](https://github.com/polkadot-js/api/blob/50b8db2263/packages/types/src/types/registry.ts#L65)*
 
 ## Methods
 
@@ -30,6 +30,6 @@
 
 ▸ **unwrap**(): *[RegistryMetadataEvent](_types_registry_.registrymetadataevent.md)[]*
 
-*Defined in [packages/types/src/types/registry.ts:66](https://github.com/polkadot-js/api/blob/4b1a9ab9e1/packages/types/src/types/registry.ts#L66)*
+*Defined in [packages/types/src/types/registry.ts:66](https://github.com/polkadot-js/api/blob/50b8db2263/packages/types/src/types/registry.ts#L66)*
 
 **Returns:** *[RegistryMetadataEvent](_types_registry_.registrymetadataevent.md)[]*
