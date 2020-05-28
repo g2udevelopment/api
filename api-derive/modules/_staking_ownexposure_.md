@@ -6,15 +6,95 @@
 
 ### Functions
 
+* [_ownExposure](_staking_ownexposure_.md#_ownexposure)
+* [_ownExposures](_staking_ownexposure_.md#_ownexposures)
 * [ownExposure](_staking_ownexposure_.md#ownexposure)
+* [ownExposures](_staking_ownexposure_.md#ownexposures)
 
 ## Functions
+
+###  _ownExposure
+
+▸ **_ownExposure**(`api`: ApiInterfaceRx): *function*
+
+*Defined in [packages/api-derive/src/staking/ownExposure.ts:16](https://github.com/polkadot-js/api/blob/0187f1ff19/packages/api-derive/src/staking/ownExposure.ts#L16)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`api` | ApiInterfaceRx |
+
+**Returns:** *function*
+
+▸ (`accountId`: Uint8Array | string, `era`: EraIndex, `withActive`: boolean): *Observable‹DeriveOwnExposure›*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`accountId` | Uint8Array &#124; string |
+`era` | EraIndex |
+`withActive` | boolean |
+
+___
+
+###  _ownExposures
+
+▸ **_ownExposures**(`api`: ApiInterfaceRx): *function*
+
+*Defined in [packages/api-derive/src/staking/ownExposure.ts:46](https://github.com/polkadot-js/api/blob/0187f1ff19/packages/api-derive/src/staking/ownExposure.ts#L46)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`api` | ApiInterfaceRx |
+
+**Returns:** *function*
+
+▸ (`accountId`: Uint8Array | string, `eras`: EraIndex[], `withActive`: boolean): *Observable‹DeriveOwnExposure[]›*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`accountId` | Uint8Array &#124; string |
+`eras` | EraIndex[] |
+`withActive` | boolean |
+
+___
 
 ###  ownExposure
 
 ▸ **ownExposure**(`api`: ApiInterfaceRx): *function*
 
-*Defined in [packages/api-derive/src/staking/ownExposure.ts:13](https://github.com/polkadot-js/api/blob/28aa9e18a7/packages/api-derive/src/staking/ownExposure.ts#L13)*
+*Defined in [packages/api-derive/src/staking/ownExposure.ts:40](https://github.com/polkadot-js/api/blob/0187f1ff19/packages/api-derive/src/staking/ownExposure.ts#L40)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`api` | ApiInterfaceRx |
+
+**Returns:** *function*
+
+▸ (`accountId`: Uint8Array | string, `era`: EraIndex): *Observable‹DeriveOwnExposure›*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`accountId` | Uint8Array &#124; string |
+`era` | EraIndex |
+
+___
+
+###  ownExposures
+
+▸ **ownExposures**(`api`: ApiInterfaceRx): *function*
+
+*Defined in [packages/api-derive/src/staking/ownExposure.ts:56](https://github.com/polkadot-js/api/blob/0187f1ff19/packages/api-derive/src/staking/ownExposure.ts#L56)*
 
 **Parameters:**
 
