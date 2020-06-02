@@ -778,6 +778,9 @@ ___
 ### TooManySignatories
 - **summary**:   There are too many signatories in the list. 
  
+### Uncallable
+- **summary**:   A call with a `false` IsCallable filter was attempted. 
+ 
 ### UnexpectedTimepoint
 - **summary**:   A timepoint was given, yet no multisig operation is underway. 
  

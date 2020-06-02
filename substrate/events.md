@@ -405,6 +405,9 @@ ___
 ### Slash(`AccountId`, `Balance`)
 - **summary**:   One validator (and its nominators) has been slashed by the given amount. 
  
+### SolutionStored(`ElectionCompute`)
+- **summary**:   A new solution for the upcoming election has been stored. 
+ 
 ### StakingElection(`ElectionCompute`)
 - **summary**:   A new set of stakers was elected with the given computation method. 
  
@@ -557,6 +560,9 @@ ___
  
 ### NewMultisig(`AccountId`, `AccountId`, `CallHash`)
 - **summary**:   A new multisig operation has begun. First param is the account that is approving, second is the multisig account, third is hash of the call. 
+ 
+### Uncallable(`u32`)
+- **summary**:   A call with a `false` IsCallable filter was attempted. 
 
 ___
 

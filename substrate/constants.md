@@ -86,7 +86,9 @@ ___
  
 ### storageSizeOffset: `u32`
 - **interface**: `api.consts.contracts.storageSizeOffset`
-- **summary**:   Size of a contract at the time of instantiation. This is a simple way to ensure that empty contracts eventually gets deleted. 
+- **summary**:   A size offset for an contract. A just created account with untouched storage will have that much of storage from the perspective of the state rent. 
+
+  This is a simple way to ensure that contracts with empty storage eventually get deleted by making them pay rent. This creates an incentive to remove them early in order to save rent. 
  
 ### surchargeReward: `BalanceOf`
 - **interface**: `api.consts.contracts.surchargeReward`
